@@ -34,4 +34,17 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy on GitHub Pages
+
+This project is configured to automatically deploy to GitHub Pages whenever you push changes to the `main` branch.
+
+1. Go to your repository settings on GitHub.
+2. Navigate to **Pages**.
+3. Under **Build and deployment** > **Source**, ensure it is set to **GitHub Actions**.
+4. Once you push to `main`, the `.github/workflows/deploy.yml` workflow will trigger automatically.
+
 # InterviewKit
+
+## License
+Project is licensed under the [Apache License 2.0](LICENSE).
+
