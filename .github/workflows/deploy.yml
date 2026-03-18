@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  NODE_VERSION: "lts/*"
 
 jobs:
   build:
@@ -29,7 +29,7 @@ jobs:
         run: |
           if [ -f "${{ github.workspace }}/package-lock.json" ]; then
             echo "manager=npm" >> $GITHUB_OUTPUT
-            echo "command=ci" >> $GITHUB_OUTPUT
+            echo "command=install" >> $GITHUB_OUTPUT
             echo "runner=npx --no-install" >> $GITHUB_OUTPUT
           elif [ -f "${{ github.workspace }}/yarn.lock" ]; then
             echo "manager=yarn" >> $GITHUB_OUTPUT
@@ -47,7 +47,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "24"   # upgrade to Node 24 to avoid deprecation
+          node-version: ${{ env.NODE_VERSION }}
           cache: ${{ steps.detect-package-manager.outputs.manager }}
 
       - name: Setup Pages
@@ -60,9 +60,6 @@ jobs:
 
       - name: Build Next.js site
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
-
-      - name: Export static files
-        run: ${{ steps.detect-package-manager.outputs.runner }} next export
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
