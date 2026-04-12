@@ -1,4 +1,4 @@
-import { getDocsForTopic } from "@/lib/mdx";
+import { getDocsForTopic, getTopics } from "@/lib/mdx";
 import Link from "next/link";
 
 const ArrowLeftIcon = ({ className }: { className?: string }) => (
@@ -39,6 +39,13 @@ const FileTextIcon = ({ className }: { className?: string }) => (
     <path d="M16 17H8" />
   </svg>
 );
+
+export async function generateStaticParams() {
+  const topics = getTopics();
+  return topics.map((topic) => ({
+    topic,
+  }));
+}
 
 export default async function TopicPage({
   params,

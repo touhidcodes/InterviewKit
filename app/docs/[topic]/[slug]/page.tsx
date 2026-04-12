@@ -1,4 +1,4 @@
-import { getDocContent } from "@/lib/mdx";
+import { getDocContent, getDocsForTopic, getTopics } from "@/lib/mdx";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -19,6 +19,23 @@ const ArrowLeftIcon = ({ className }: { className?: string }) => (
     <path d="M19 12H5" />
   </svg>
 );
+
+export async function generateStaticParams() {
+  const topics = getTopics();
+  const params: { topic: string; slug: string }[] = [];
+
+  for (const topic of topics) {
+    const docs = getDocsForTopic(topic);
+    for (const doc of docs) {
+      params.push({
+        topic,
+        slug: doc.slug,
+      });
+    }
+  }
+
+  return params;
+}
 
 export default async function DocPage({
   params,
