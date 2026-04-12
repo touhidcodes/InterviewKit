@@ -1,9 +1,8 @@
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "InterviewKit - Ace Your Tech Interviews",
@@ -19,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${inter.className} bg-background text-foreground antialiased selection:bg-primary/20`}
+        className={`${GeistSans.variable} ${GeistMono.variable} font-sans bg-background text-foreground antialiased selection:bg-primary/20`}
       >
         <div className="relative flex min-h-screen flex-col">
           <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/60 backdrop-blur-xl transition-all">
