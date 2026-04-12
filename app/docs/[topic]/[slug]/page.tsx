@@ -53,7 +53,7 @@ export default async function DocPage({
     topic.charAt(0).toUpperCase() + topic.slice(1).replace("-", " ");
 
   return (
-    <div className="container max-w-4xl py-20 px-4 md:px-6">
+    <div className="max-w-4xl">
       <div className="mb-12">
         <Link
           href={`/docs/${topic}`}

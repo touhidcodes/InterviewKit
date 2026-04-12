@@ -58,7 +58,7 @@ export default async function TopicPage({
     topic.charAt(0).toUpperCase() + topic.slice(1).replace("-", " ");
 
   return (
-    <div className="container py-20">
+    <div className="max-w-4xl">
       <div className="mb-12">
         <Link
           href="/"
