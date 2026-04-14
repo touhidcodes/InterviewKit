@@ -1,77 +1,29 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar";
 
 type NavigationItem = {
   title: string;
   docs: { slug: string; meta: any }[];
 };
-
-function NavSection({
-  section,
-  pathname,
-}: {
-  section: NavigationItem;
-  pathname: string;
-}) {
-  const isSectionActive = pathname.startsWith(`/docs/${section.title}`);
-  const [isOpen, setIsOpen] = useState(isSectionActive);
-
-  useEffect(() => {
-    if (isSectionActive) setIsOpen(true);
-  }, [isSectionActive]);
-
-  return (
-    <div className="pb-3">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="group flex w-full items-center justify-between rounded-md px-2 py-1.5 text-sm font-semibold capitalize hover:text-foreground transition-colors text-foreground"
-      >
-        <span>{section.title.replace("-", " ")}</span>
-        <ChevronRight
-          className={cn(
-            "h-4 w-4 text-muted-foreground/70 transition-transform duration-200",
-            isOpen && "rotate-90",
-          )}
-        />
-      </button>
-      {isOpen && (
-        <div className="mt-1 flex flex-col space-y-[2px] border-l border-border/50 ml-3 pl-3">
-          <Link
-            href={`/docs/${section.title}`}
-            className={cn(
-              "flex w-full items-center rounded-md border border-transparent px-2 py-1.5 text-sm text-muted-foreground hover:bg-muted/60 hover:text-foreground transition-colors",
-              pathname === `/docs/${section.title}` &&
-                "font-medium text-foreground bg-muted/60",
-            )}
-          >
-            Overview
-          </Link>
-          {section.docs.map((doc) => {
-            const href = `/docs/${section.title}/${doc.slug}`;
-            const isActive = pathname === href;
-            return (
-              <Link
-                key={doc.slug}
-                href={href}
-                className={cn(
-                  "flex w-full items-center rounded-md border border-transparent px-2 py-1.5 text-sm text-muted-foreground hover:bg-muted/60 hover:text-foreground transition-colors",
-                  isActive && "font-medium text-foreground bg-muted/60",
-                )}
-              >
-                {doc.meta.title || doc.slug}
-              </Link>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  );
-}
 
 export default function DocsSidebar({
   navigation,
@@ -81,10 +33,70 @@ export default function DocsSidebar({
   const pathname = usePathname();
 
   return (
-    <div className="w-full">
-      {navigation.map((section) => (
-        <NavSection key={section.title} section={section} pathname={pathname} />
-      ))}
-    </div>
+    <Sidebar
+      className="mt-14 h-[calc(100vh-3.5rem)] border-none bg-transparent"
+      collapsible="none"
+    >
+      <SidebarContent className="px-4 py-6">
+        {navigation.map((section) => {
+          const isSectionActive = pathname.startsWith(`/docs/${section.title}`);
+          const isActiveOverview = pathname === `/docs/${section.title}`;
+
+          return (
+            <Collapsible
+              key={section.title}
+              defaultOpen={isSectionActive}
+              className="group/collapsible"
+            >
+              <SidebarGroup className="px-0 py-0 mb-4">
+                <SidebarGroupLabel
+                  asChild
+                  className="cursor-pointer mb-1 text-sm font-semibold capitalize text-foreground px-2 h-9"
+                >
+                  <CollapsibleTrigger className="hover:bg-muted/60 transition-colors w-full rounded-md flex justify-between items-center bg-transparent border-0">
+                    <span className="capitalize">
+                      {section.title.replace("-", " ")}
+                    </span>
+                    <ChevronRight className="h-4 w-4 text-muted-foreground transition-transform group-data-[state=open]/collapsible:rotate-90" />
+                  </CollapsibleTrigger>
+                </SidebarGroupLabel>
+                <CollapsibleContent>
+                  <SidebarGroupContent className="pl-4 ml-2 border-l border-border/50 transition-all border-opacity-70">
+                    <SidebarMenu className="gap-1 mt-1">
+                      <SidebarMenuItem>
+                        <SidebarMenuButton
+                          render={<Link href={`/docs/${section.title}`} />}
+                          isActive={isActiveOverview}
+                          className="h-8 text-sm text-muted-foreground font-medium hover:text-foreground data-[active=true]:text-foreground data-[active=true]:bg-muted/60"
+                        >
+                          Overview
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                      {section.docs.map((doc) => {
+                        const href = `/docs/${section.title}/${doc.slug}`;
+                        const isActive = pathname === href;
+                        return (
+                          <SidebarMenuItem key={doc.slug}>
+                            <SidebarMenuButton
+                              asChild
+                              isActive={isActive}
+                              className="h-8 text-sm text-muted-foreground font-medium hover:text-foreground data-[active=true]:text-foreground data-[active=true]:bg-muted/60"
+                            >
+                              <Link href={href}>
+                                {doc.meta.title || doc.slug}
+                              </Link>
+                            </SidebarMenuButton>
+                          </SidebarMenuItem>
+                        );
+                      })}
+                    </SidebarMenu>
+                  </SidebarGroupContent>
+                </CollapsibleContent>
+              </SidebarGroup>
+            </Collapsible>
+          );
+        })}
+      </SidebarContent>
+    </Sidebar>
   );
 }
