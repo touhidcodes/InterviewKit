@@ -50,15 +50,15 @@ export default function DocsSidebar({
             >
               <SidebarGroup className="px-0 py-0 mb-4">
                 <SidebarGroupLabel
-                  asChild
+                  render={<CollapsibleTrigger />}
                   className="cursor-pointer mb-1 text-sm font-semibold capitalize text-foreground px-2 h-9"
                 >
-                  <CollapsibleTrigger className="hover:bg-muted/60 transition-colors w-full rounded-md flex justify-between items-center bg-transparent border-0">
+                  <div className="hover:bg-muted/60 transition-colors w-full rounded-md flex justify-between items-center bg-transparent border-0 px-2 h-full">
                     <span className="capitalize">
                       {section.title.replace("-", " ")}
                     </span>
                     <ChevronRight className="h-4 w-4 text-muted-foreground transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                  </CollapsibleTrigger>
+                  </div>
                 </SidebarGroupLabel>
                 <CollapsibleContent>
                   <SidebarGroupContent className="pl-4 ml-2 border-l border-border/50 transition-all border-opacity-70">
@@ -78,13 +78,11 @@ export default function DocsSidebar({
                         return (
                           <SidebarMenuItem key={doc.slug}>
                             <SidebarMenuButton
-                              asChild
+                              render={<Link href={href} />}
                               isActive={isActive}
                               className="h-8 text-sm text-muted-foreground font-medium hover:text-foreground data-[active=true]:text-foreground data-[active=true]:bg-muted/60"
                             >
-                              <Link href={href}>
-                                {doc.meta.title || doc.slug}
-                              </Link>
+                              {doc.meta.title || doc.slug}
                             </SidebarMenuButton>
                           </SidebarMenuItem>
                         );

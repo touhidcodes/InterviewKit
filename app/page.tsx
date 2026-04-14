@@ -184,67 +184,70 @@ export default function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-background">
       {/* Background patterns */}
-      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[500px] w-full max-w-[1200px] bg-primary/20 blur-[120px]" />
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_-20%,var(--primary)/10%,transparent_50%),radial-gradient(circle_at_0%_0%,var(--primary)/5%,transparent_30%)]" />
+      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 
       <div className="container relative z-10 px-4 md:px-6">
         <section className="flex flex-col items-center justify-center pt-24 pb-12 text-center md:pt-40 md:pb-24">
-          <div className="inline-flex items-center rounded-3xl border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium transition-colors hover:bg-primary/10">
-            <span className="text-primary-foreground">
+          <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium transition-all hover:bg-primary/10 hover:scale-105">
+            <span className="text-primary font-semibold">
               InterviewKit 1.0 is here &rarr;
             </span>
           </div>
 
-          <h1 className="mt-8 text-4xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
-            <span className="block text-foreground">The Complete Guide to</span>
-            <span className="bg-gradient-to-t from-foreground to-foreground/50 bg-clip-text text-transparent">
+          <h1 className="mt-8 text-4xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl text-balance">
+            <span className="block text-foreground mb-2">
+              The Complete Guide to
+            </span>
+            <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
               Tech Interviews.
             </span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-[600px] text-lg text-muted-foreground md:text-xl">
-            Streamlined paths to master backend engineering, system design, and
-            competitive programming with a focus on real-world application.
+          <p className="mx-auto mt-8 max-w-[650px] text-lg text-muted-foreground md:text-xl leading-relaxed text-balance">
+            Master backend engineering, system design, and competitive
+            programming with a focus on deep technical mental models.
           </p>
 
-          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
+          <div className="mt-12 flex flex-col items-center gap-5 sm:flex-row">
             <Link
               href="/docs/javascript"
-              className="group relative flex items-center justify-center h-12 px-8 font-semibold text-background rounded-full bg-foreground transition-all duration-200 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] active:scale-95"
+              className="group relative flex items-center justify-center h-14 px-10 font-bold text-primary-foreground rounded-full bg-primary transition-all duration-300 hover:shadow-[0_8px_30px_rgb(var(--primary-rgb)/0.4)] hover:-translate-y-1 active:scale-95"
             >
               Get Started
-              <ArrowRightIcon className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRightIcon className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
               href="https://github.com/touhidcodes/interviewkit"
               target="_blank"
-              className="flex items-center justify-center h-12 px-8 font-medium border rounded-full border-border bg-background transition-colors hover:bg-muted active:scale-95"
+              className="flex items-center justify-center h-14 px-10 font-semibold border-2 rounded-full border-border bg-background/50 backdrop-blur-sm transition-all hover:bg-muted hover:-translate-y-1 active:scale-95"
             >
               GitHub Repo
             </Link>
           </div>
         </section>
 
-        <section className="grid grid-cols-1 gap-6 pb-20 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <section className="grid grid-cols-1 gap-6 pb-20 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 max-w-6xl mx-auto">
           {topics.map((topic) => (
             <Link
               key={topic.slug}
               href={`/docs/${topic.slug}`}
-              className="group relative block overflow-hidden rounded-2xl border border-white/5 bg-white/[0.02] p-6 transition-all hover:bg-white/[0.05] hover:border-white/10"
+              className="group relative block overflow-hidden rounded-[var(--radius)] border border-border/50 bg-card/50 backdrop-blur-md p-8 transition-all hover:bg-card hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1"
             >
               <div
-                className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-br ${topic.color} blur-xl`}
+                className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-br ${topic.color} blur-3xl`}
               />
-              <div className="relative z-10 flex flex-col items-start gap-4">
+              <div className="relative z-10 flex flex-col items-start gap-5">
                 <div
-                  className={`rounded-xl p-2 bg-background border border-border shadow-sm ${topic.textColor}`}
+                  className={`rounded-2xl p-3 bg-background border border-border shadow-soft ${topic.textColor}`}
                 >
                   {topic.icon}
                 </div>
-                <div className="space-y-1">
-                  <h3 className="font-bold text-lg">{topic.name}</h3>
-                  <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                    Expert resources and curated questions.
+                <div className="space-y-2">
+                  <h3 className="font-bold text-xl">{topic.name}</h3>
+                  <p className="text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors leading-relaxed">
+                    Comprehensive study guides, patterns, and expert-curated
+                    questions for {topic.name} mastery.
                   </p>
                 </div>
               </div>

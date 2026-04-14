@@ -127,3 +127,9 @@
     @apply font-sans;
   }
 }
+
+@layer utilities {
+  .shadow-soft {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  }
+}
