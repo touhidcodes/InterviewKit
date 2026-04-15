@@ -263,62 +263,78 @@ export default function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-background">
       {/* Background patterns */}
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_-20%,var(--primary)/10%,transparent_50%),radial-gradient(circle_at_0%_0%,var(--primary)/5%,transparent_30%)]" />
-      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+      <div className="absolute inset-0 z-0 bg-background" />
+
+      {/* Primary Glow */}
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_-10%,var(--primary)/20%,transparent_60%)]" />
+
+      {/* Secondary Glows for color blend */}
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_0%_40%,oklch(0.7_0.15_200)/10%,transparent_40%)]" />
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_100%_60%,oklch(0.7_0.15_300)/10%,transparent_40%)]" />
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_80%_0%,oklch(0.7_0.15_160)/10%,transparent_40%)]" />
+
+      {/* Grid Pattern */}
+      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,var(--border)/30%_1px,transparent_1px),linear-gradient(to_bottom,var(--border)/30%_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+
+      {/* Noise Texture (Subtle) */}
+      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
       <div className="container relative z-10 px-4 md:px-6">
-        <section className="flex flex-col items-center justify-center pt-24 pb-12 text-center md:pt-40 md:pb-24">
-          <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium transition-all hover:bg-primary/10 hover:scale-105">
+        <section className="flex flex-col items-center justify-center pt-24 pb-12 text-center md:pt-40 md:pb-24 animate-in fade-in slide-in-from-top-4 duration-1000">
+          <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium transition-all hover:bg-primary/10 hover:scale-105 mb-8">
             <span className="text-primary font-semibold">
               InterviewKit 1.0 is here &rarr;
             </span>
           </div>
 
-          <h1 className="mt-8 text-4xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl text-balance">
-            <span className="block text-foreground mb-2">
-              The Complete Guide to
-            </span>
-            <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-              Tech Interviews.
+          <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl lg:text-8xl text-balance leading-[1.1]">
+            <span className="block text-foreground mb-2">Master your next</span>
+            <span className="bg-gradient-to-r from-primary via-indigo-500 to-cyan-500 bg-clip-text text-transparent">
+              Tech Interview.
             </span>
           </h1>
 
-          <p className="mx-auto mt-8 max-w-[650px] text-lg text-muted-foreground md:text-xl leading-relaxed text-balance">
-            Master backend engineering, system design, and competitive
-            programming with a focus on deep technical mental models.
+          <p className="mx-auto mt-8 max-w-[750px] text-lg text-muted-foreground md:text-2xl leading-relaxed text-balance opacity-90">
+            The ultimate blueprint for backend engineering, system design, and
+            competitive programming. Built for engineers who aim for the top.
           </p>
 
-          <div className="mt-12 flex flex-col items-center gap-5 sm:flex-row">
+          <div className="mt-12 flex flex-col items-center gap-6 sm:flex-row w-full max-w-2xl justify-center">
             <Link
               href="/docs/javascript"
-              className="group relative flex items-center justify-center h-14 px-10 font-bold text-primary-foreground rounded-full bg-primary transition-all duration-300 hover:shadow-[0_8px_30px_rgb(var(--primary-rgb)/0.4)] hover:-translate-y-1 active:scale-95"
+              className="group relative flex items-center justify-center h-14 px-10 font-bold text-primary-foreground rounded-full bg-primary shadow-lg shadow-primary/20 transition-all duration-300 hover:shadow-primary/40 hover:-translate-y-1 active:scale-95 whitespace-nowrap overflow-hidden"
             >
-              Get Started
-              <ArrowRightIcon className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
+              <span className="relative flex items-center">
+                Start Learning
+                <ArrowRightIcon className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </span>
             </Link>
-            <div className="relative group w-full max-w-sm">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
-                <svg
-                  className="w-4 h-4 text-muted-foreground"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                  />
-                </svg>
+            <div className="relative group w-full p-[1px] rounded-full bg-gradient-to-r from-border/50 via-border/20 to-border/50 focus-within:from-primary/50 focus-within:via-primary focus-within:to-primary/50 transition-all duration-500 shadow-2xl shadow-black/5">
+              <div className="relative flex items-center w-full h-[54px] bg-card/40 backdrop-blur-2xl rounded-full overflow-hidden">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none">
+                  <svg
+                    className="w-5 h-5 text-muted-foreground group-focus-within:text-primary transition-colors duration-300"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                    />
+                  </svg>
+                </div>
+                <input
+                  type="search"
+                  className="block w-full h-full p-4 pl-14 text-base text-foreground bg-transparent border-none rounded-full focus:ring-0 outline-none"
+                  placeholder="Search topics (e.g. System Design, Event Loop)..."
+                />
               </div>
-              <input
-                type="search"
-                className="block w-full h-14 p-4 pl-12 text-sm text-foreground bg-background/50 border border-border rounded-full focus:ring-primary focus:border-primary backdrop-blur-sm transition-all outline-none"
-                placeholder="Search for topics (e.g. Hooks, Event Loop)..."
-              />
             </div>
           </div>
         </section>
