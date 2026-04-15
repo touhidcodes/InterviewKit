@@ -130,8 +130,66 @@ const ShieldCheckIcon = ({ className }: { className?: string }) => (
     strokeLinejoin="round"
     className={className}
   >
-    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z" />
+    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1-1z" />
     <path d="m9 12 2 2 4-4" />
+  </svg>
+);
+
+const DatabaseIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <ellipse cx="12" cy="5" rx="9" ry="3" />
+    <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+    <path d="M3 12A9 3 0 0 0 21 12" />
+  </svg>
+);
+
+const ServerIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <rect width="20" height="8" x="2" y="2" rx="2" ry="2" />
+    <rect width="20" height="8" x="2" y="14" rx="2" ry="2" />
+    <line x1="6" x2="6.01" y1="6" y2="6" />
+    <line x1="6" x2="6.01" y1="18" y2="18" />
+  </svg>
+);
+
+const BarChartIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <line x1="12" x2="12" y1="20" y2="10" />
+    <line x1="18" x2="18" y1="20" y2="4" />
+    <line x1="6" x2="6" y1="20" y2="16" />
   </svg>
 );
 
@@ -157,6 +215,27 @@ export default function Home() {
       icon: <GlobeIcon className="h-6 w-6" />,
       color: "from-green-500/10 to-green-500/5",
       textColor: "text-green-500",
+    },
+    {
+      name: "Express.js",
+      slug: "expressjs",
+      icon: <ServerIcon className="h-6 w-6" />,
+      color: "from-gray-500/10 to-gray-500/5",
+      textColor: "text-gray-400",
+    },
+    {
+      name: "MongoDB",
+      slug: "mongodb",
+      icon: <DatabaseIcon className="h-6 w-6" />,
+      color: "from-emerald-500/10 to-emerald-500/5",
+      textColor: "text-emerald-500",
+    },
+    {
+      name: "SQL",
+      slug: "sql",
+      icon: <BarChartIcon className="h-6 w-6" />,
+      color: "from-indigo-500/10 to-indigo-500/5",
+      textColor: "text-indigo-500",
     },
     {
       name: "Python",
@@ -217,13 +296,30 @@ export default function Home() {
               Get Started
               <ArrowRightIcon className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
-            <Link
-              href="https://github.com/touhidcodes/interviewkit"
-              target="_blank"
-              className="flex items-center justify-center h-14 px-10 font-semibold border-2 rounded-full border-border bg-background/50 backdrop-blur-sm transition-all hover:bg-muted hover:-translate-y-1 active:scale-95"
-            >
-              GitHub Repo
-            </Link>
+            <div className="relative group w-full max-w-sm">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                <svg
+                  className="w-4 h-4 text-muted-foreground"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="search"
+                className="block w-full h-14 p-4 pl-12 text-sm text-foreground bg-background/50 border border-border rounded-full focus:ring-primary focus:border-primary backdrop-blur-sm transition-all outline-none"
+                placeholder="Search for topics (e.g. Hooks, Event Loop)..."
+              />
+            </div>
           </div>
         </section>
 
@@ -256,53 +352,96 @@ export default function Home() {
         </section>
 
         <section className="py-20 border-t border-border/40">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-gradient">
-                Built for the next generation of engineers.
-              </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                We believe that interview preparation should be structured,
-                deep, and intuitive. InterviewKit provides you with the mental
-                models and technical depth required to ace roles at top-tier
-                companies.
-              </p>
-              <ul className="space-y-3">
-                {[
-                  "Deep dive into System Design patterns",
-                  "Optimized Algorithms with live examples",
-                  "Backend mastery with Node.js & Go",
-                  "Modern Frontend architectures",
-                ].map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-center gap-3 text-sm font-medium"
-                  >
-                    <ZapIcon className="h-4 w-4 text-primary" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-24">
+              {[
+                { label: "High-Quality Topics", value: "10+" },
+                { label: "In-Depth Questions", value: "500+" },
+                { label: "Community Stars", value: "2k+" },
+                { label: "Success Stories", value: "100+" },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center space-y-2">
+                  <div className="text-4xl font-extrabold text-foreground">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-muted-foreground uppercase tracking-widest font-semibold">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="relative aspect-video rounded-2xl border border-white/10 bg-black overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent" />
-              <div className="flex h-full items-center justify-center p-8">
-                <code className="text-sm text-primary-foreground font-mono leading-relaxed">
-                  $ npx interview-kit init
-                  <br />
-                  <span className="text-muted-foreground opacity-50">
-                    # Preparing your path to success...
-                  </span>
-                  <br />
-                  <span className="text-green-400">? Select track:</span>{" "}
-                  [Backend, Frontend, Fullstack]
-                  <br />
-                  <span className="text-green-400">? Goal:</span> Senior
-                  Software Engineer @ Tier 1<br />
-                  ...
-                </code>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold tracking-tight md:text-5xl text-gradient">
+                  Built for the next generation of engineers.
+                </h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  We believe that interview preparation should be structured,
+                  deep, and intuitive. InterviewKit provides you with the mental
+                  models and technical depth required to ace roles at top-tier
+                  companies.
+                </p>
+                <ul className="space-y-3">
+                  {[
+                    "Deep dive into System Design patterns",
+                    "Optimized Algorithms with live examples",
+                    "Backend mastery with Node.js & Go",
+                    "Modern Frontend architectures",
+                  ].map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-center gap-3 text-sm font-medium"
+                    >
+                      <ZapIcon className="h-4 w-4 text-primary" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="relative aspect-video rounded-2xl border border-white/10 bg-black overflow-hidden shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent" />
+                <div className="flex h-full items-center justify-center p-8">
+                  <code className="text-sm text-primary-foreground font-mono leading-relaxed">
+                    $ npx interview-kit init
+                    <br />
+                    <span className="text-muted-foreground opacity-50">
+                      # Preparing your path to success...
+                    </span>
+                    <br />
+                    <span className="text-green-400">? Select track:</span>{" "}
+                    [Backend, Frontend, Fullstack]
+                    <br />
+                    <span className="text-green-400">? Goal:</span> Senior
+                    Software Engineer @ Tier 1<br />
+                    ...
+                  </code>
+                </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section className="py-20 text-center">
+          <div className="max-w-3xl mx-auto space-y-8 bg-primary/5 rounded-3xl p-12 border border-primary/10">
+            <h2 className="text-3xl font-bold">Join the community</h2>
+            <p className="text-muted-foreground">
+              Stay updated with the latest interview patterns and technical
+              deep-dives. Join 2,000+ engineers mastering their craft.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="h-12 px-6 rounded-full bg-background border border-border outline-none focus:ring-2 focus:ring-primary/50 lg:w-80"
+              />
+              <button className="h-12 px-8 rounded-full bg-primary text-primary-foreground font-bold hover:opacity-90 transition-opacity">
+                Subscribe
+              </button>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Zero spam. Only high-quality technical content.
+            </p>
           </div>
         </section>
       </div>
