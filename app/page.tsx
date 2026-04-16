@@ -265,19 +265,29 @@ export default function Home() {
       {/* Background patterns */}
       <div className="absolute inset-0 z-0 bg-background" />
 
-      {/* Primary Glow */}
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_-10%,var(--primary)/20%,transparent_60%)]" />
+      {/* Modern Mesh Gradients */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {/* Top center glow */}
+        <div className="absolute -top-[10%] left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-primary/20 blur-[120px] rounded-full animate-pulse-slow" />
 
-      {/* Secondary Glows for color blend */}
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_0%_40%,oklch(0.7_0.15_200)/10%,transparent_40%)]" />
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_100%_60%,oklch(0.7_0.15_300)/10%,transparent_40%)]" />
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_80%_0%,oklch(0.7_0.15_160)/10%,transparent_40%)]" />
+        {/* Left side accent */}
+        <div className="absolute top-[10%] -left-[10%] w-[600px] h-[600px] bg-indigo-500/10 blur-[100px] rounded-full" />
 
-      {/* Grid Pattern */}
-      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,var(--border)/30%_1px,transparent_1px),linear-gradient(to_bottom,var(--border)/30%_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+        {/* Right side accent */}
+        <div className="absolute top-[20%] -right-[10%] w-[600px] h-[600px] bg-cyan-500/10 blur-[100px] rounded-full" />
+      </div>
+
+      {/* Grid Pattern 1: Large lines */}
+      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,var(--border)/15%_1px,transparent_1px),linear-gradient(to_bottom,var(--border)/15%_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+
+      {/* Grid Pattern 2: Subtle Dots */}
+      <div className="absolute inset-0 z-0 grid-pattern opacity-40 [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+
+      {/* Radial overlay for depth */}
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top,transparent_0%,var(--background)_80%)]" />
 
       {/* Noise Texture (Subtle) */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div className="absolute inset-0 z-0 opacity-[0.02] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
       <div className="container relative z-10 px-4 md:px-6">
         <section className="flex flex-col items-center justify-center pt-24 pb-12 text-center md:pt-40 md:pb-24 animate-in fade-in slide-in-from-top-4 duration-1000">
@@ -289,7 +299,7 @@ export default function Home() {
 
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl lg:text-8xl text-balance leading-[1.1]">
             <span className="block text-foreground mb-2">Master your next</span>
-            <span className="bg-gradient-to-r from-primary via-indigo-500 to-cyan-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary via-indigo-400 to-cyan-400 bg-clip-text text-transparent">
               Tech Interview.
             </span>
           </h1>
