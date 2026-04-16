@@ -40,3 +40,21 @@ export function getDocContent(topic: string, slug: string) {
     content,
   };
 }
+
+export function extractHeadings(content: string) {
+  const headingRegex = /^(##|###)\s+(.*)$/gm;
+  const headings = [];
+  let match;
+
+  while ((match = headingRegex.exec(content)) !== null) {
+    const level = match[1].length;
+    const title = match[2].trim();
+    const id = title
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/\s+/g, "-");
+    headings.push({ title, id, level });
+  }
+
+  return headings;
+}

@@ -40,7 +40,11 @@ export default function DocsSidebar({
       <SidebarContent className="px-4 py-6">
         {navigation.map((section) => {
           const isSectionActive = pathname.startsWith(`/docs/${section.title}`);
-          const isActiveOverview = pathname === `/docs/${section.title}`;
+          const coreDocs = section.docs.filter(
+            (doc) => doc.slug !== "q-and-a" && doc.slug !== "intro",
+          );
+          const qaDocs = section.docs.filter((doc) => doc.slug === "q-and-a");
+          const introDoc = section.docs.find((doc) => doc.slug === "intro");
 
           return (
             <Collapsible
@@ -50,43 +54,88 @@ export default function DocsSidebar({
             >
               <SidebarGroup className="px-0 py-0 mb-4">
                 <SidebarGroupLabel
-                  render={<CollapsibleTrigger />}
                   className="cursor-pointer mb-1 text-sm font-semibold capitalize text-foreground px-2 h-9"
-                >
-                  <div className="hover:bg-muted/60 transition-colors w-full rounded-md flex justify-between items-center bg-transparent border-0 px-2 h-full">
-                    <span className="capitalize">
-                      {section.title.replace("-", " ")}
-                    </span>
-                    <ChevronRight className="h-4 w-4 text-muted-foreground transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                  </div>
-                </SidebarGroupLabel>
+                  render={(props) => (
+                    <CollapsibleTrigger
+                      {...props}
+                      className="hover:bg-muted/60 transition-colors w-full rounded-md flex justify-between items-center bg-transparent border-0 px-2 h-full outline-none"
+                    >
+                      <span className="capitalize">
+                        {section.title.replace("-", " ")}
+                      </span>
+                      <ChevronRight className="h-4 w-4 text-muted-foreground transition-transform group-data-[state=open]/collapsible:rotate-90" />
+                    </CollapsibleTrigger>
+                  )}
+                />
                 <CollapsibleContent>
                   <SidebarGroupContent className="pl-4 ml-2 border-l border-border/50 transition-all border-opacity-70">
                     <SidebarMenu className="gap-1 mt-1">
+                      {/* Intro/Overview */}
                       <SidebarMenuItem>
                         <SidebarMenuButton
-                          render={<Link href={`/docs/${section.title}`} />}
-                          isActive={isActiveOverview}
+                          isActive={
+                            pathname === `/docs/${section.title}` ||
+                            (introDoc &&
+                              pathname === `/docs/${section.title}/intro`)
+                          }
                           className="h-8 text-sm text-muted-foreground font-medium hover:text-foreground data-[active=true]:text-foreground data-[active=true]:bg-muted/60"
+                          render={
+                            <Link
+                              href={`/docs/${section.title}/${introDoc ? "intro" : ""}`}
+                            />
+                          }
                         >
                           Overview
                         </SidebarMenuButton>
                       </SidebarMenuItem>
-                      {section.docs.map((doc) => {
-                        const href = `/docs/${section.title}/${doc.slug}`;
-                        const isActive = pathname === href;
-                        return (
-                          <SidebarMenuItem key={doc.slug}>
-                            <SidebarMenuButton
-                              render={<Link href={href} />}
-                              isActive={isActive}
-                              className="h-8 text-sm text-muted-foreground font-medium hover:text-foreground data-[active=true]:text-foreground data-[active=true]:bg-muted/60"
-                            >
-                              {doc.meta.title || doc.slug}
-                            </SidebarMenuButton>
-                          </SidebarMenuItem>
-                        );
-                      })}
+
+                      {/* Core Topics Group */}
+                      {coreDocs.length > 0 && (
+                        <>
+                          <div className="px-2 py-2 mt-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground/50">
+                            Core Topics
+                          </div>
+                          {coreDocs.map((doc) => {
+                            const href = `/docs/${section.title}/${doc.slug}`;
+                            const isActive = pathname === href;
+                            return (
+                              <SidebarMenuItem key={doc.slug}>
+                                <SidebarMenuButton
+                                  isActive={isActive}
+                                  className="h-8 text-sm text-muted-foreground font-medium hover:text-foreground data-[active=true]:text-foreground data-[active=true]:bg-muted/60"
+                                  render={<Link href={href} />}
+                                >
+                                  {doc.meta.title || doc.slug.replace("-", " ")}
+                                </SidebarMenuButton>
+                              </SidebarMenuItem>
+                            );
+                          })}
+                        </>
+                      )}
+
+                      {/* Q&A Group */}
+                      {qaDocs.length > 0 && (
+                        <>
+                          <div className="px-2 py-2 mt-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground/50">
+                            Practice
+                          </div>
+                          {qaDocs.map((doc) => {
+                            const href = `/docs/${section.title}/${doc.slug}`;
+                            const isActive = pathname === href;
+                            return (
+                              <SidebarMenuItem key={doc.slug}>
+                                <SidebarMenuButton
+                                  isActive={isActive}
+                                  className="h-8 text-sm text-muted-foreground font-medium hover:text-foreground data-[active=true]:text-foreground data-[active=true]:bg-muted/60"
+                                  render={<Link href={href} />}
+                                >
+                                  Q&A Session
+                                </SidebarMenuButton>
+                              </SidebarMenuItem>
+                            );
+                          })}
+                        </>
+                      )}
                     </SidebarMenu>
                   </SidebarGroupContent>
                 </CollapsibleContent>

@@ -1,6 +1,15 @@
-import { getDocContent, getDocsForTopic, getTopics } from "@/lib/mdx";
+import {
+  extractHeadings,
+  getDocContent,
+  getDocsForTopic,
+  getTopics,
+} from "@/lib/mdx";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ReactMarkdown from "react-markdown";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeSlug from "rehype-slug";
+import remarkGfm from "remark-gfm";
 
 const ArrowLeftIcon = ({ className }: { className?: string }) => (
   <svg
@@ -49,44 +58,79 @@ export default async function DocPage({
     notFound();
   }
 
+  const headings = extractHeadings(doc.content);
   const topicName =
     topic.charAt(0).toUpperCase() + topic.slice(1).replace("-", " ");
 
   return (
-    <div className="max-w-4xl">
-      <div className="mb-12">
-        <Link
-          href={`/docs/${topic}`}
-          className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group"
-        >
-          <ArrowLeftIcon className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-          Back to {topicName}
-        </Link>
-        <div className="mt-8">
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-gradient">
-            {doc.meta.title || slug}
-          </h1>
-          {doc.meta.description && (
-            <p className="mt-6 text-xl text-muted-foreground leading-relaxed">
-              {doc.meta.description}
-            </p>
-          )}
-        </div>
-      </div>
-
-      <div className="relative border-l border-border/40 pl-8 ml-2">
-        <div className="prose prose-invert prose-lg max-w-none">
-          {/* Simple markdown content rendering for now */}
-          <div className="whitespace-pre-wrap font-sans text-foreground/90 leading-relaxed">
-            {doc.content}
+    <div className="xl:grid xl:grid-cols-[1fr_240px] xl:gap-10">
+      <div className="mx-auto w-full min-w-0 max-w-3xl">
+        <div className="mb-12">
+          <Link
+            href={`/docs/${topic}`}
+            className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group"
+          >
+            <ArrowLeftIcon className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            Back to {topicName}
+          </Link>
+          <div className="mt-8">
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-gradient">
+              {doc.meta.title || slug}
+            </h1>
+            {doc.meta.description && (
+              <p className="mt-6 text-xl text-muted-foreground leading-relaxed">
+                {doc.meta.description}
+              </p>
+            )}
           </div>
         </div>
+
+        <div className="relative border-l border-border/40 pl-8 ml-2">
+          <div className="prose prose-invert prose-lg max-w-none prose-headings:scroll-mt-20">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeSlug, rehypeAutolinkHeadings]}
+            >
+              {doc.content}
+            </ReactMarkdown>
+          </div>
+        </div>
+
+        <div className="mt-20 pt-12 border-t border-border/40">
+          <p className="text-center text-sm text-muted-foreground">
+            Found a mistake? Help us improve this guide on GitHub.
+          </p>
+        </div>
       </div>
 
-      <div className="mt-20 pt-12 border-t border-border/40">
-        <p className="text-center text-sm text-muted-foreground">
-          Found a mistake? Help us improve this guide on GitHub.
-        </p>
+      <div className="hidden text-sm xl:block">
+        <div className="sticky top-20">
+          <div className="overflow-y-auto py-2 pl-6 border-l border-border/40">
+            <h3 className="font-semibold text-sm mb-4">On this page</h3>
+            <ul className="space-y-3.5">
+              {headings.map((heading) => (
+                <li
+                  key={heading.id}
+                  style={{ paddingLeft: `${heading.level - 2}rem` }}
+                >
+                  <Link
+                    href={`#${heading.id}`}
+                    className={`text-muted-foreground hover:text-foreground transition-colors block leading-snug ${
+                      heading.level === 3 ? "text-[0.8rem]" : "text-sm"
+                    }`}
+                  >
+                    {heading.title}
+                  </Link>
+                </li>
+              ))}
+              {headings.length === 0 && (
+                <li className="text-muted-foreground italic opacity-50">
+                  No subtopics found
+                </li>
+              )}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );
