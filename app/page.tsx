@@ -278,7 +278,7 @@ export default function Home() {
       </div>
 
       {/* Hero Grid Pattern - Matching the image */}
-      <div className="absolute inset-0 z-0 hero-grid [mask-image:linear-gradient(to_bottom,black_50%,transparent_100%)] opacity-50" />
+      <div className="absolute inset-0 z-0 hero-grid [mask-image:linear-gradient(to_bottom,black_50%,transparent_100%)] opacity-70" />
 
       {/* Noise Texture (Subtle) */}
       <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
