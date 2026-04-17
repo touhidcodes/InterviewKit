@@ -292,14 +292,11 @@ export default function Home() {
           </div>
 
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl lg:text-8xl text-balance leading-[1.1]">
-            <span className="block text-foreground mb-4 text-2xl md:text-3xl font-medium text-muted-foreground">
-              তাহলে আর দেরি কেন?
-            </span>
-            <span className="block text-foreground mb-2">Master your next</span>
+            <span className="block text-foreground mb-2">Master Your Next</span>
             <span className="hero-text-gradient">Tech Interview.</span>
           </h1>
 
-          <p className="mx-auto mt-8 max-w-[750px] text-lg text-muted-foreground md:text-2xl leading-relaxed text-balance opacity-80">
+          <p className="mx-auto mt-8 max-w-[750px] text-lg text-muted-foreground md:text-2xl leading-relaxed text-balance">
             Learn Development,{" "}
             <span className="text-foreground font-semibold">
               Change your Future.
@@ -315,7 +312,7 @@ export default function Home() {
             >
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
               <span className="relative flex items-center gap-2">
-                এখনই এনরোল করো
+                Get Started
                 <ArrowRightIcon className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </span>
             </Link>
