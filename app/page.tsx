@@ -266,28 +266,22 @@ export default function Home() {
       <div className="absolute inset-0 z-0 bg-background" />
 
       {/* Modern Mesh Gradients */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* Top center glow */}
-        <div className="absolute -top-[10%] left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-primary/20 blur-[120px] rounded-full animate-pulse-slow" />
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Deep purple radial glow */}
+        <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[1200px] h-[800px] bg-purple-600/20 blur-[120px] rounded-full opacity-50" />
 
-        {/* Left side accent */}
-        <div className="absolute top-[10%] -left-[10%] w-[600px] h-[600px] bg-indigo-500/10 blur-[100px] rounded-full" />
+        {/* Magenta accent */}
+        <div className="absolute top-[40%] -left-[10%] w-[800px] h-[800px] bg-fuchsia-500/10 blur-[100px] rounded-full opacity-30" />
 
-        {/* Right side accent */}
-        <div className="absolute top-[20%] -right-[10%] w-[600px] h-[600px] bg-cyan-500/10 blur-[100px] rounded-full" />
+        {/* Orange accent */}
+        <div className="absolute bottom-0 right-0 w-[800px] h-[600px] bg-orange-500/10 blur-[100px] rounded-full opacity-20" />
       </div>
 
-      {/* Grid Pattern 1: Large lines */}
-      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,var(--border)/15%_1px,transparent_1px),linear-gradient(to_bottom,var(--border)/15%_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-
-      {/* Grid Pattern 2: Subtle Dots */}
-      <div className="absolute inset-0 z-0 grid-pattern opacity-40 [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-
-      {/* Radial overlay for depth */}
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top,transparent_0%,var(--background)_80%)]" />
+      {/* Hero Grid Pattern - Matching the image */}
+      <div className="absolute inset-0 z-0 hero-grid [mask-image:linear-gradient(to_bottom,black_50%,transparent_100%)] opacity-50" />
 
       {/* Noise Texture (Subtle) */}
-      <div className="absolute inset-0 z-0 opacity-[0.02] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
       <div className="container relative z-10 px-4 md:px-6">
         <section className="flex flex-col items-center justify-center pt-24 pb-12 text-center md:pt-40 md:pb-24 animate-in fade-in slide-in-from-top-4 duration-1000">
@@ -298,26 +292,31 @@ export default function Home() {
           </div>
 
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl lg:text-8xl text-balance leading-[1.1]">
-            <span className="block text-foreground mb-2">Master your next</span>
-            <span className="bg-gradient-to-r from-primary via-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-              Tech Interview.
+            <span className="block text-foreground mb-4 text-2xl md:text-3xl font-medium text-muted-foreground">
+              তাহলে আর দেরি কেন?
             </span>
+            <span className="block text-foreground mb-2">Master your next</span>
+            <span className="hero-text-gradient">Tech Interview.</span>
           </h1>
 
-          <p className="mx-auto mt-8 max-w-[750px] text-lg text-muted-foreground md:text-2xl leading-relaxed text-balance opacity-90">
-            The ultimate blueprint for backend engineering, system design, and
-            competitive programming. Built for engineers who aim for the top.
+          <p className="mx-auto mt-8 max-w-[750px] text-lg text-muted-foreground md:text-2xl leading-relaxed text-balance opacity-80">
+            Learn Development,{" "}
+            <span className="text-foreground font-semibold">
+              Change your Future.
+            </span>
+            <br />
+            Built for engineers who aim for the top.
           </p>
 
           <div className="mt-12 flex flex-col items-center gap-6 sm:flex-row w-full max-w-2xl justify-center">
             <Link
               href="/docs/javascript"
-              className="group relative flex items-center justify-center h-14 px-10 font-bold text-primary-foreground rounded-full bg-primary shadow-lg shadow-primary/20 transition-all duration-300 hover:shadow-primary/40 hover:-translate-y-1 active:scale-95 whitespace-nowrap overflow-hidden"
+              className="group relative flex items-center justify-center h-16 px-12 font-bold text-white rounded-2xl hero-btn-gradient overflow-hidden shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
-              <span className="relative flex items-center">
-                Start Learning
-                <ArrowRightIcon className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <span className="relative flex items-center gap-2">
+                এখনই এনরোল করো
+                <ArrowRightIcon className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </span>
             </Link>
             <div className="relative group w-full p-[1px] rounded-full bg-gradient-to-r from-border/50 via-border/20 to-border/50 focus-within:from-primary/50 focus-within:via-primary focus-within:to-primary/50 transition-all duration-500 shadow-2xl shadow-black/5">
