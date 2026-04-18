@@ -267,21 +267,22 @@ export default function Home() {
 
       {/* Modern Mesh Gradients */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Deep purple radial glow */}
-        <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[1200px] h-[800px] bg-purple-600/20 blur-[120px] rounded-full opacity-50" />
+        {/* Midnight Violet & Deep Purple Mesh */}
+        <div className="absolute top-[-10%] left-[-10%] w-[700px] h-[700px] bg-[#331238]/30 blur-[120px] rounded-full opacity-60 animate-pulse" />
+        <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-[#541363]/25 blur-[100px] rounded-full opacity-50" />
 
-        {/* Magenta accent */}
-        <div className="absolute top-[40%] -left-[10%] w-[800px] h-[800px] bg-fuchsia-500/10 blur-[100px] rounded-full opacity-30" />
+        {/* Subtle glass effect orb in center */}
+        <div className="absolute top-[15%] left-1/2 -translate-x-1/2 w-[1000px] h-[500px] hero-glass-gradient opacity-20 blur-[80px] rounded-full" />
 
-        {/* Orange accent */}
-        <div className="absolute bottom-0 right-0 w-[800px] h-[600px] bg-orange-500/10 blur-[100px] rounded-full opacity-20" />
+        {/* Deep background accent */}
+        <div className="absolute bottom-[-10%] left-[20%] w-[800px] h-[600px] bg-[#331238]/10 blur-[100px] rounded-full opacity-30" />
       </div>
 
-      {/* Hero Grid Pattern - Matching the image */}
-      <div className="absolute inset-0 z-0 hero-grid [mask-image:linear-gradient(to_bottom,black_50%,transparent_100%)] opacity-70" />
+      {/* Hero Grid Pattern */}
+      <div className="absolute inset-0 z-0 hero-grid [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)] opacity-40" />
 
-      {/* Noise Texture (Subtle) */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      {/* Noise Texture */}
+      <div className="absolute inset-0 z-0 opacity-[0.02] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
       <div className="container relative z-10 px-4 md:px-6">
         <section className="flex flex-col items-center justify-center pt-24 pb-12 text-center md:pt-40 md:pb-24 animate-in fade-in slide-in-from-top-4 duration-1000">
