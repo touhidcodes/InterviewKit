@@ -30,8 +30,8 @@ export default function RootLayout({
         >
           <div className="relative flex min-h-screen flex-col">
             <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/60 backdrop-blur-xl transition-all">
-              <div className="container flex h-14 items-center justify-between">
-                <div className="flex items-center gap-8">
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex h-14 items-center justify-between">
+                <div className="flex items-center gap-4 md:gap-8">
                   <Link className="flex items-center space-x-2" href="/">
                     <span className="font-bold text-xl tracking-tight">
                       InterviewKit
@@ -64,12 +64,12 @@ export default function RootLayout({
                     </Link>
                   </nav>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 sm:gap-4">
                   <ThemeToggle />
                   <Link
                     href="https://github.com/touhidcodes/interviewkit"
                     target="_blank"
-                    className="rounded-full bg-foreground px-4 py-1.5 text-xs font-semibold text-background transition-all hover:bg-foreground/90"
+                    className="hidden sm:inline-flex rounded-full bg-foreground px-4 py-1.5 text-xs font-semibold text-background transition-all hover:bg-foreground/90"
                   >
                     Star on GitHub
                   </Link>
@@ -77,9 +77,9 @@ export default function RootLayout({
               </div>
             </header>
             <main className="flex-1">{children}</main>
-            <footer className="border-t border-border/40 py-12">
-              <div className="container flex flex-col items-center justify-between gap-6 md:flex-row">
-                <div className="flex flex-col gap-2">
+            <footer className="border-t border-border/40 py-8 md:py-12">
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-between gap-6 md:flex-row text-center md:text-left">
+                <div className="flex flex-col gap-2 items-center md:items-start">
                   <span className="font-bold text-lg">InterviewKit</span>
                   <p className="text-sm text-muted-foreground max-w-[300px]">
                     Mastering the art of technical interviews, one topic at a

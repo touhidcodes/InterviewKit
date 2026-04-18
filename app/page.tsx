@@ -442,13 +442,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        <footer className="py-12 border-t border-border/20 text-center text-sm text-muted-foreground">
-          <p>
-            © {new Date().getFullYear()} InterviewKit. Built for the next
-            generation of engineers.
-          </p>
-        </footer>
       </div>
     </div>
   );
