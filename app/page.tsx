@@ -198,130 +198,86 @@ export default function Home() {
     {
       name: "JavaScript",
       slug: "javascript",
-      icon: <Code2Icon className="h-6 w-6" />,
-      color: "from-yellow-500/10 to-yellow-500/5",
-      textColor: "text-yellow-500",
+      icon: <Code2Icon className="h-5 w-5" />,
+      description: "Core concepts, Event Loop, and modern ES6+ patterns.",
     },
     {
       name: "TypeScript",
       slug: "typescript",
-      icon: <ShieldCheckIcon className="h-6 w-6" />,
-      color: "from-cyan-500/10 to-cyan-500/5",
-      textColor: "text-cyan-500",
+      icon: <ShieldCheckIcon className="h-5 w-5" />,
+      description: "Type safety, Generics, and advanced utility types.",
     },
     {
       name: "Node.js",
       slug: "nodejs",
-      icon: <GlobeIcon className="h-6 w-6" />,
-      color: "from-green-500/10 to-green-500/5",
-      textColor: "text-green-500",
+      icon: <GlobeIcon className="h-5 w-5" />,
+      description: "Runtime, Streams, and Backend architecture.",
     },
     {
       name: "Express.js",
       slug: "expressjs",
-      icon: <ServerIcon className="h-6 w-6" />,
-      color: "from-gray-500/10 to-gray-500/5",
-      textColor: "text-gray-400",
+      icon: <ServerIcon className="h-5 w-5" />,
+      description: "Middleware, Routing, and RESTful API patterns.",
     },
     {
       name: "MongoDB",
       slug: "mongodb",
-      icon: <DatabaseIcon className="h-6 w-6" />,
-      color: "from-emerald-500/10 to-emerald-500/5",
-      textColor: "text-emerald-500",
-    },
-    {
-      name: "SQL",
-      slug: "sql",
-      icon: <BarChartIcon className="h-6 w-6" />,
-      color: "from-indigo-500/10 to-indigo-500/5",
-      textColor: "text-indigo-500",
-    },
-    {
-      name: "Python",
-      slug: "python",
-      icon: <CpuIcon className="h-6 w-6" />,
-      color: "from-blue-500/10 to-blue-500/5",
-      textColor: "text-blue-500",
+      icon: <DatabaseIcon className="h-5 w-5" />,
+      description: "NoSQL patterns, Aggregations, and indexing.",
     },
     {
       name: "System Design",
       slug: "system-design",
-      icon: <InfinityIcon className="h-6 w-6" />,
-      color: "from-purple-500/10 to-purple-500/5",
-      textColor: "text-purple-500",
-    },
-    {
-      name: "Algorithms",
-      slug: "problem-solving",
-      icon: <ZapIcon className="h-6 w-6" />,
-      color: "from-orange-500/10 to-orange-500/5",
-      textColor: "text-orange-500",
+      icon: <InfinityIcon className="h-5 w-5" />,
+      description: "Scalability, Caching, and Load balancing.",
     },
   ];
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background">
+    <div className="relative min-h-screen bg-background font-sans selection:bg-primary/10">
       {/* Background patterns */}
-      <div className="absolute inset-0 z-0 bg-background" />
+      <div className="absolute inset-0 z-0 doc-hero-bg opacity-70" />
+      <div className="absolute inset-0 z-0 hero-grid [mask-image:radial-gradient(ellipse_at_center,black_80%,transparent_100%)] opacity-40 dark:opacity-60" />
 
-      {/* Modern Mesh Gradients */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Midnight Violet & Deep Purple Mesh */}
-        <div className="absolute top-[-10%] left-[-10%] w-[700px] h-[700px] bg-[#331238]/30 blur-[120px] rounded-full opacity-60 animate-pulse" />
-        <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-[#541363]/25 blur-[100px] rounded-full opacity-50" />
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Navigation / Top Header area would be here - Hero starts below */}
 
-        {/* Subtle glass effect orb in center */}
-        <div className="absolute top-[15%] left-1/2 -translate-x-1/2 w-[1000px] h-[500px] hero-glass-gradient opacity-20 blur-[80px] rounded-full" />
-
-        {/* Deep background accent */}
-        <div className="absolute bottom-[-10%] left-[20%] w-[800px] h-[600px] bg-[#331238]/10 blur-[100px] rounded-full opacity-30" />
-      </div>
-
-      {/* Hero Grid Pattern */}
-      <div className="absolute inset-0 z-0 hero-grid [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)] opacity-40" />
-
-      {/* Noise Texture */}
-      <div className="absolute inset-0 z-0 opacity-[0.02] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-
-      <div className="container relative z-10 px-4 md:px-6">
-        <section className="flex flex-col items-center justify-center pt-24 pb-12 text-center md:pt-40 md:pb-24 animate-in fade-in slide-in-from-top-4 duration-1000">
-          <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium transition-all hover:bg-primary/10 hover:scale-105 mb-8">
-            <span className="text-primary font-semibold">
-              InterviewKit 1.0 is here &rarr;
-            </span>
-          </div>
-
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl lg:text-8xl text-balance leading-[1.1]">
-            <span className="block text-foreground mb-2">Master Your Next</span>
-            <span className="hero-text-gradient">Tech Interview.</span>
-          </h1>
-
-          <p className="mx-auto mt-8 max-w-[750px] text-lg text-muted-foreground md:text-2xl leading-relaxed text-balance">
-            Learn Development,{" "}
-            <span className="text-foreground font-semibold">
-              Change your Future.
-            </span>
-            <br />
-            Built for engineers who aim for the top.
-          </p>
-
-          <div className="mt-12 flex flex-col items-center gap-6 sm:flex-row w-full max-w-2xl justify-center">
-            <Link
-              href="/docs/javascript"
-              className="group relative flex items-center justify-center h-16 px-12 font-bold text-white rounded-2xl hero-btn-gradient overflow-hidden shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300"
-            >
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <span className="relative flex items-center gap-2">
-                Get Started
-                <ArrowRightIcon className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+        <section className="flex flex-col items-center justify-center pt-20 pb-16 text-center md:pt-32 md:pb-28">
+          <div className="animate-in fade-in slide-in-from-bottom-3 duration-1000">
+            <Link href="#" className="command-pill mb-10 inline-flex">
+              <span>InterviewKit 1.0 is officially here</span>
+              <span className="h-3 w-px bg-border" />
+              <span className="flex items-center gap-1 font-semibold">
+                Read the announcement <ArrowRightIcon className="h-3 w-3" />
               </span>
             </Link>
-            <div className="relative group w-full p-[1px] rounded-full bg-gradient-to-r from-border/50 via-border/20 to-border/50 focus-within:from-primary/50 focus-within:via-primary focus-within:to-primary/50 transition-all duration-500 shadow-2xl shadow-black/5">
-              <div className="relative flex items-center w-full h-[54px] bg-card/40 backdrop-blur-2xl rounded-full overflow-hidden">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none">
+
+            <h1 className="mx-auto max-w-4xl text-5xl font-bold tracking-tight sm:text-7xl lg:text-8xl">
+              <span className="block text-foreground mb-1">
+                Master Your Next
+              </span>
+              <span className="hero-text-gradient italic">Tech Interview.</span>
+            </h1>
+
+            <p className="mx-auto mt-8 max-w-2xl text-lg text-muted-foreground md:text-xl leading-relaxed">
+              Curated guides, deep dives into system architecture, and the
+              technical mental models required to ace roles at top-tier
+              companies.
+            </p>
+
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Link
+                href="/docs/javascript"
+                className="flex h-12 items-center justify-center rounded-lg bg-primary px-8 text-sm font-semibold text-primary-foreground shadow-neat transition-all hover:opacity-90 active:scale-95"
+              >
+                Get Started
+                <ArrowRightIcon className="ml-2 h-4 w-4" />
+              </Link>
+
+              <div className="relative group min-w-[320px]">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
                   <svg
-                    className="w-5 h-5 text-muted-foreground group-focus-within:text-primary transition-colors duration-300"
+                    className="w-4 h-4 text-muted-foreground"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -338,135 +294,161 @@ export default function Home() {
                 </div>
                 <input
                   type="search"
-                  className="block w-full h-full p-4 pl-14 text-base text-foreground bg-transparent border-none rounded-full focus:ring-0 outline-none"
-                  placeholder="Search topics (e.g. System Design, Event Loop)..."
+                  className="block w-full h-12 pl-11 pr-12 text-sm text-foreground bg-muted/20 border border-border/60 rounded-lg outline-none focus:bg-muted/40 transition-colors focus:ring-1 focus:ring-primary/20"
+                  placeholder="Search documentation..."
                 />
+                <div className="absolute inset-y-0 right-3 flex items-center">
+                  <kbd className="hidden sm:inline-flex h-6 select-none items-center gap-1 rounded border border-border bg-background px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-60">
+                    <span className="text-xs">⌘</span>K
+                  </kbd>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="grid grid-cols-1 gap-6 pb-20 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 max-w-6xl mx-auto">
-          {topics.map((topic) => (
-            <Link
-              key={topic.slug}
-              href={`/docs/${topic.slug}`}
-              className="group relative block overflow-hidden rounded-[var(--radius)] border border-border/50 bg-card/50 backdrop-blur-md p-8 transition-all hover:bg-card hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1"
-            >
-              <div
-                className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-br ${topic.color} blur-3xl`}
-              />
-              <div className="relative z-10 flex flex-col items-start gap-5">
-                <div
-                  className={`rounded-2xl p-3 bg-background border border-border shadow-soft ${topic.textColor}`}
+        <section className="mb-32">
+          <div className="grid grid-cols-1 gap-px bg-border/20 overflow-hidden rounded-2xl border border-border/50 sm:grid-cols-2 lg:grid-cols-3">
+            {topics.map((topic) => (
+              <Link
+                key={topic.slug}
+                href={`/docs/${topic.slug}`}
+                className="group relative bg-background p-8 transition-colors hover:bg-muted/30"
+              >
+                <div className="flex flex-col gap-4">
+                  <div className="doc-card-icon shadow-neat">{topic.icon}</div>
+                  <div>
+                    <h3 className="text-base font-semibold leading-7">
+                      {topic.name}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                      {topic.description}
+                    </p>
+                  </div>
+                </div>
+                <div className="absolute bottom-6 right-6 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1">
+                  <ArrowRightIcon className="h-4 w-4 text-primary" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="py-24 border-t border-border/30">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+            <div>
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                Documentation optimized for developer experience.
+              </h2>
+              <p className="mt-6 text-lg leading-8 text-muted-foreground">
+                We believe that interview preparation should be structured,
+                deep, and intuitive. InterviewKit provides you with the mental
+                models required to excel in modern engineering roles.
+              </p>
+              <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-muted-foreground lg:max-w-none">
+                {[
+                  {
+                    title: "Deep Dive Patterns",
+                    description:
+                      "Beyond basics, we cover real-world architecture.",
+                  },
+                  {
+                    title: "Optimized Algorithms",
+                    description:
+                      "Patterns for problem solving, not just memorization.",
+                  },
+                  {
+                    title: "System Excellence",
+                    description:
+                      "Mastering large scale backend and frontend systems.",
+                  },
+                ].map((feature) => (
+                  <div key={feature.title} className="relative pl-9">
+                    <dt className="inline font-semibold text-foreground">
+                      <ZapIcon className="absolute left-1 top-1 h-5 w-5 text-primary/60" />
+                      {feature.title}
+                    </dt>
+                    <dd className="inline block mt-1">{feature.description}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            <div className="relative lg:mt-0 mt-12 bg-muted/20 border border-border/40 rounded-xl overflow-hidden shadow-neat">
+              <div className="flex items-center gap-1.5 px-4 py-3 bg-muted/40 border-b border-border/40">
+                <div className="h-2 w-2 rounded-full bg-red-500/50" />
+                <div className="h-2 w-2 rounded-full bg-yellow-500/50" />
+                <div className="h-2 w-2 rounded-full bg-green-500/50" />
+                <div className="ml-2 text-[10px] font-mono text-muted-foreground">
+                  bash — 80×24
+                </div>
+              </div>
+              <div className="p-6 font-mono text-sm leading-relaxed">
+                <div className="flex gap-3">
+                  <span className="text-primary/60">$</span>
+                  <span>npx interview-kit@latest init</span>
+                </div>
+                <div className="mt-2 text-muted-foreground opacity-60">
+                  # Initializing interview path...
+                </div>
+                <div className="mt-4 flex gap-3">
+                  <span className="text-green-500">?</span>
+                  <span className="font-bold">Select target track:</span>
+                </div>
+                <div className="mt-1 pl-6 text-muted-foreground">
+                  <div>❯ Fullstack (React + Node.js)</div>
+                  <div> Backend (System Design + Go)</div>
+                  <div> Frontend (Performance + Architecture)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-24 border-t border-border/30">
+          <div className="rounded-3xl bg-muted/10 border border-border/40 px-6 py-16 sm:px-16 sm:py-24 lg:flex lg:items-center lg:px-24">
+            <div className="lg:flex-auto">
+              <h2 className="text-3xl font-bold tracking-tight">
+                Stay update with InterviewKit.
+              </h2>
+              <p className="mt-4 text-lg leading-8 text-muted-foreground">
+                Zero spam. Only high-quality technical content and new interview
+                patterns.
+              </p>
+            </div>
+            <div className="mt-10 lg:ml-12 lg:mt-0 lg:flex-none">
+              <form className="flex max-w-md gap-x-4">
+                <label htmlFor="email-address" className="sr-only">
+                  Email address
+                </label>
+                <input
+                  id="email-address"
+                  name="email"
+                  type="email"
+                  required
+                  className="min-w-0 flex-auto rounded-md border border-border/60 bg-background px-3.5 py-2 text-foreground shadow-sm focus:ring-1 focus:ring-primary/20 sm:text-sm sm:leading-6 outline-none"
+                  placeholder="name@gmail.com"
+                />
+                <button
+                  type="submit"
+                  className="flex-none rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm hover:opacity-90 transition-opacity"
                 >
-                  {topic.icon}
-                </div>
-                <div className="space-y-2">
-                  <h3 className="font-bold text-xl">{topic.name}</h3>
-                  <p className="text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors leading-relaxed">
-                    Comprehensive study guides, patterns, and expert-curated
-                    questions for {topic.name} mastery.
-                  </p>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </section>
-
-        <section className="py-20 border-t border-border/40">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-24">
-              {[
-                { label: "High-Quality Topics", value: "10+" },
-                { label: "In-Depth Questions", value: "500+" },
-                { label: "Community Stars", value: "2k+" },
-                { label: "Success Stories", value: "100+" },
-              ].map((stat) => (
-                <div key={stat.label} className="text-center space-y-2">
-                  <div className="text-4xl font-extrabold text-foreground">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-muted-foreground uppercase tracking-widest font-semibold">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="space-y-6">
-                <h2 className="text-3xl font-bold tracking-tight md:text-5xl text-gradient">
-                  Built for the next generation of engineers.
-                </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  We believe that interview preparation should be structured,
-                  deep, and intuitive. InterviewKit provides you with the mental
-                  models and technical depth required to ace roles at top-tier
-                  companies.
-                </p>
-                <ul className="space-y-3">
-                  {[
-                    "Deep dive into System Design patterns",
-                    "Optimized Algorithms with live examples",
-                    "Backend mastery with Node.js & Go",
-                    "Modern Frontend architectures",
-                  ].map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-center gap-3 text-sm font-medium"
-                    >
-                      <ZapIcon className="h-4 w-4 text-primary" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="relative aspect-video rounded-2xl border border-white/10 bg-black overflow-hidden shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent" />
-                <div className="flex h-full items-center justify-center p-8">
-                  <code className="text-sm text-primary-foreground font-mono leading-relaxed">
-                    $ npx interview-kit init
-                    <br />
-                    <span className="text-muted-foreground opacity-50">
-                      # Preparing your path to success...
-                    </span>
-                    <br />
-                    <span className="text-green-400">? Select track:</span>{" "}
-                    [Backend, Frontend, Fullstack]
-                    <br />
-                    <span className="text-green-400">? Goal:</span> Senior
-                    Software Engineer @ Tier 1<br />
-                    ...
-                  </code>
-                </div>
-              </div>
+                  Subscribe
+                </button>
+              </form>
+              <p className="mt-4 text-xs leading-5 text-muted-foreground">
+                Join 2,000+ engineers mastering their craft.
+              </p>
             </div>
           </div>
         </section>
 
-        <section className="py-20 text-center">
-          <div className="max-w-3xl mx-auto space-y-8 bg-primary/5 rounded-3xl p-12 border border-primary/10">
-            <h2 className="text-3xl font-bold">Join the community</h2>
-            <p className="text-muted-foreground">
-              Stay updated with the latest interview patterns and technical
-              deep-dives. Join 2,000+ engineers mastering their craft.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="h-12 px-6 rounded-full bg-background border border-border outline-none focus:ring-2 focus:ring-primary/50 lg:w-80"
-              />
-              <button className="h-12 px-8 rounded-full bg-primary text-primary-foreground font-bold hover:opacity-90 transition-opacity">
-                Subscribe
-              </button>
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Zero spam. Only high-quality technical content.
-            </p>
-          </div>
-        </section>
+        <footer className="py-12 border-t border-border/20 text-center text-sm text-muted-foreground">
+          <p>
+            © {new Date().getFullYear()} InterviewKit. Built for the next
+            generation of engineers.
+          </p>
+        </footer>
       </div>
     </div>
   );
