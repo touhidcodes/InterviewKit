@@ -1,3 +1,4 @@
+import TocSidebar from "@/components/toc-sidebar";
 import {
   extractHeadings,
   getDocContent,
@@ -106,29 +107,7 @@ export default async function DocPage({
       <div className="hidden text-sm xl:block">
         <div className="sticky top-20">
           <div className="overflow-y-auto h-[calc(100vh-6rem)] py-2 pl-6 border-l border-border/40 scrollbar-thin">
-            <h3 className="font-semibold text-sm mb-4">On this page</h3>
-            <ul className="space-y-3.5">
-              {headings.map((heading) => (
-                <li
-                  key={heading.id}
-                  style={{ paddingLeft: `${heading.level - 2}rem` }}
-                >
-                  <Link
-                    href={`#${heading.id}`}
-                    className={`text-muted-foreground hover:text-foreground transition-colors block leading-snug ${
-                      heading.level === 3 ? "text-[0.8rem]" : "text-sm"
-                    }`}
-                  >
-                    {heading.title}
-                  </Link>
-                </li>
-              ))}
-              {headings.length === 0 && (
-                <li className="text-muted-foreground italic opacity-50">
-                  No subtopics found
-                </li>
-              )}
-            </ul>
+            <TocSidebar headings={headings} />
           </div>
         </div>
       </div>
