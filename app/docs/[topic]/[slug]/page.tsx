@@ -105,7 +105,7 @@ export default async function DocPage({
 
       <div className="hidden text-sm xl:block">
         <div className="sticky top-20">
-          <div className="overflow-y-auto py-2 pl-6 border-l border-border/40">
+          <div className="overflow-y-auto h-[calc(100vh-6rem)] py-2 pl-6 border-l border-border/40 scrollbar-thin">
             <h3 className="font-semibold text-sm mb-4">On this page</h3>
             <ul className="space-y-3.5">
               {headings.map((heading) => (

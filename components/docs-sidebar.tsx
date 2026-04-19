@@ -34,10 +34,10 @@ export default function DocsSidebar({
 
   return (
     <Sidebar
-      className="mt-14 h-[calc(100vh-3.5rem)] border-none bg-transparent"
+      className="sticky top-14 h-[calc(100vh-3.5rem)] border-none bg-transparent"
       collapsible="none"
     >
-      <SidebarContent className="px-4 py-6">
+      <SidebarContent className="px-4 py-6 scrollbar-thin">
         {navigation.map((section) => {
           const isSectionActive = pathname.startsWith(`/docs/${section.title}`);
           const coreDocs = section.docs.filter(
