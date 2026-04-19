@@ -8,7 +8,7 @@ export function getTopics() {
   if (!fs.existsSync(contentDirectory)) return [];
   const entries = fs.readdirSync(contentDirectory, { withFileTypes: true });
   return entries
-    .filter((entry) => entry.isDirectory())
+    .filter((entry) => entry.isDirectory() && !entry.name.startsWith("."))
     .map((entry) => entry.name);
 }
 
@@ -16,23 +16,47 @@ export function getDocsForTopic(topic: string) {
   const topicPath = path.join(contentDirectory, topic);
   if (!fs.existsSync(topicPath)) return [];
 
-  const files = fs.readdirSync(topicPath);
-  return files.map((fileName) => {
-    const filePath = path.join(topicPath, fileName);
-    const fileContents = fs.readFileSync(filePath, "utf8");
-    const { data, content } = matter(fileContents);
-    return {
-      slug: fileName.replace(/\.mdx?$/, ""),
-      meta: data,
-      content,
-    };
-  });
+  const entries = fs.readdirSync(topicPath, { withFileTypes: true });
+  return entries
+    .filter((entry) => entry.isFile() && /\.mdx?$/.test(entry.name))
+    .map((entry) => {
+      const fileName = entry.name;
+      const filePath = path.join(topicPath, fileName);
+      const fileContents = fs.readFileSync(filePath, "utf8");
+      const { data, content } = matter(fileContents);
+
+      const slug = fileName
+        .replace(/\.mdx?$/, "")
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/[^\w-]/g, "");
+
+      return {
+        slug,
+        meta: data,
+        content,
+      };
+    });
 }
 
 export function getDocContent(topic: string, slug: string) {
-  const filePath = path.join(contentDirectory, topic, `${slug}.md`);
-  if (!fs.existsSync(filePath)) return null;
+  const topicPath = path.join(contentDirectory, topic);
+  if (!fs.existsSync(topicPath)) return null;
 
+  const entries = fs.readdirSync(topicPath, { withFileTypes: true });
+  const entry = entries.find((e) => {
+    if (!e.isFile()) return false;
+    const s = e.name
+      .replace(/\.mdx?$/, "")
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^\w-]/g, "");
+    return s === slug;
+  });
+
+  if (!entry) return null;
+
+  const filePath = path.join(topicPath, entry.name);
   const fileContents = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(fileContents);
   return {
