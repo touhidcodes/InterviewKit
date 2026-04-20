@@ -43,13 +43,15 @@ export default function DocsSidebar({
           const coreDocs = section.docs.filter(
             (doc) =>
               doc.slug !== "q-and-a" &&
-              doc.slug !== "intro" &&
+              doc.slug !== "overview" &&
               !doc.slug.includes("questions"),
           );
           const qaDocs = section.docs.filter(
             (doc) => doc.slug === "q-and-a" || doc.slug.includes("questions"),
           );
-          const introDoc = section.docs.find((doc) => doc.slug === "intro");
+          const overviewDoc = section.docs.find(
+            (doc) => doc.slug === "overview",
+          );
 
           return (
             <Collapsible

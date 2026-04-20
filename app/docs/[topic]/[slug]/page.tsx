@@ -72,7 +72,7 @@ export default async function DocPage({
             Back to {topicName}
           </Link>
           <div className="mt-8">
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-gradient">
+            <h1 className="text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl text-gradient">
               {doc.meta.title || slug}
             </h1>
             {doc.meta.description && (

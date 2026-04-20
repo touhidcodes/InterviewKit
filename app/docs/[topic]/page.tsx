@@ -91,10 +91,10 @@ export default async function TopicPage({
   const { topic } = await params;
   const allDocs = getDocsForTopic(topic);
 
-  const introDoc = allDocs.find((doc) => doc.slug === "intro");
+  const overviewDoc = allDocs.find((doc) => doc.slug === "overview");
   const coreDocs = allDocs.filter(
     (doc) =>
-      doc.slug !== "intro" &&
+      doc.slug !== "overview" &&
       doc.slug !== "q-and-a" &&
       !doc.slug.includes("questions"),
   );
@@ -124,11 +124,11 @@ export default async function TopicPage({
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-bold text-primary tracking-widest uppercase mb-4">
                 Documentation Module
               </div>
-              <h1 className="text-5xl font-black tracking-tight sm:text-6xl lg:text-7xl text-gradient">
-                {introDoc?.meta.title || topicName}
+              <h1 className="text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl text-gradient">
+                {overviewDoc?.meta.title || topicName}
               </h1>
-              <p className="max-w-[700px] text-xl text-muted-foreground leading-relaxed">
-                {introDoc?.meta.description ||
+              <p className="max-w-[700px] text-base text-muted-foreground leading-relaxed">
+                {overviewDoc?.meta.description ||
                   `Master ${topicName} with our professional-grade interview guides and deep dives.`}
               </p>
             </div>
@@ -145,13 +145,13 @@ export default async function TopicPage({
         {/* Core Topics Section */}
         {coreDocs.length > 0 && (
           <section>
-            <div className="flex items-end justify-between mb-10 pb-6 border-b border-border/40">
+            <div className="flex items-end justify-between mb-8 pb-4 border-b border-border/40">
               <div className="space-y-1">
-                <h2 className="text-3xl font-black tracking-tight">
+                <h2 className="text-2xl font-black tracking-tight">
                   Core Curriculum
                 </h2>
-                <p className="text-muted-foreground text-sm font-medium">
-                  Master the fundamental internals and advanced patterns.
+                <p className="text-muted-foreground text-xs font-medium">
+                  Fundamental internals and patterns.
                 </p>
               </div>
               <div className="hidden sm:block text-xs font-bold text-muted-foreground opacity-50 tracking-tighter uppercase tabular-nums">
@@ -169,7 +169,7 @@ export default async function TopicPage({
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-muted border border-border/40 text-muted-foreground mb-6 group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300 rotate-0 group-hover:rotate-6">
                     <FileTextIcon className="h-7 w-7" />
                   </div>
-                  <h3 className="text-2xl font-bold group-hover:text-primary transition-colors leading-tight">
+                  <h3 className="text-lg font-bold group-hover:text-primary transition-colors leading-tight">
                     {doc.meta.title || doc.slug}
                   </h3>
                   <p className="mt-4 text-muted-foreground line-clamp-3 leading-relaxed text-sm flex-1">
@@ -192,8 +192,8 @@ export default async function TopicPage({
             <div className="rounded-[2.5rem] bg-muted/30 border border-border/40 p-8 sm:p-12 overflow-hidden relative">
               <div className="absolute top-0 right-0 -m-20 h-64 w-64 bg-primary/10 blur-[100px] rounded-full" />
 
-              <div className="flex items-center gap-4 mb-10">
-                <h2 className="text-3xl font-black tracking-tight text-foreground">
+              <div className="flex items-center gap-4 mb-8">
+                <h2 className="text-2xl font-black tracking-tight text-foreground">
                   Interview Readiness
                 </h2>
                 <div className="h-px flex-1 bg-gradient-to-r from-border/80 to-transparent" />
@@ -210,7 +210,7 @@ export default async function TopicPage({
                       <ZapIcon className="h-7 w-7" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold leading-tight">
+                      <h3 className="text-lg font-bold leading-tight">
                         {doc.meta.title || "Interview Q&A"}
                       </h3>
                       <p className="mt-1 text-sm text-muted-foreground font-medium">

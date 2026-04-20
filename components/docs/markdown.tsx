@@ -16,6 +16,7 @@ export default function Markdown({ content }: { content: string }) {
       className="prose dark:prose-invert max-w-none transition-colors duration-300
       prose-headings:scroll-mt-20 
       prose-headings:font-black prose-headings:tracking-tight
+      prose-h1:text-4xl prose-h2:text-2xl prose-h3:text-xl
       prose-a:text-primary prose-a:no-underline hover:prose-a:underline
       prose-strong:text-foreground prose-strong:font-bold
       prose-code:text-primary prose-code:bg-primary/10 prose-code:px-1 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none

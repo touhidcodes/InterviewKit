@@ -3,7 +3,7 @@ title: Event Loop
 description: Mastering the Event Loop, Call Stack, and Macrotasks vs Microtasks.
 ---
 
-# The JavaScript Event Loop
+## The JavaScript Event Loop
 
 JavaScript is a single-threaded language, which means it can only execute one command at a time. The **Event Loop** is what allows JS to perform non-blocking I/O operations despite its single-threaded nature.
 
