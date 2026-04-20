@@ -1,4 +1,4 @@
-import TocSidebar from "@/components/toc-sidebar";
+import TocSidebar from "@/components/sidebar/toc-sidebar";
 import {
   extractHeadings,
   getDocContent,

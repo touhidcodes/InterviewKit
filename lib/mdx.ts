@@ -7,9 +7,28 @@ const contentDirectory = path.join(process.cwd(), "content");
 export function getTopics() {
   if (!fs.existsSync(contentDirectory)) return [];
   const entries = fs.readdirSync(contentDirectory, { withFileTypes: true });
-  return entries
+  const topics = entries
     .filter((entry) => entry.isDirectory() && !entry.name.startsWith("."))
     .map((entry) => entry.name);
+
+  const metaPath = path.join(contentDirectory, "meta.json");
+  if (fs.existsSync(metaPath)) {
+    try {
+      const order = JSON.parse(fs.readFileSync(metaPath, "utf8")) as string[];
+      return topics.sort((a, b) => {
+        const aIndex = order.indexOf(a);
+        const bIndex = order.indexOf(b);
+        if (aIndex === -1 && bIndex === -1) return a.localeCompare(b);
+        if (aIndex === -1) return 1;
+        if (bIndex === -1) return -1;
+        return aIndex - bIndex;
+      });
+    } catch (e) {
+      console.error("Error parsing meta.json in content directory", e);
+    }
+  }
+
+  return topics;
 }
 
 export function getDocsForTopic(topic: string) {
@@ -17,7 +36,7 @@ export function getDocsForTopic(topic: string) {
   if (!fs.existsSync(topicPath)) return [];
 
   const entries = fs.readdirSync(topicPath, { withFileTypes: true });
-  return entries
+  const docs = entries
     .filter((entry) => entry.isFile() && /\.mdx?$/.test(entry.name))
     .map((entry) => {
       const fileName = entry.name;
@@ -37,6 +56,25 @@ export function getDocsForTopic(topic: string) {
         content,
       };
     });
+
+  const metaPath = path.join(topicPath, "meta.json");
+  if (fs.existsSync(metaPath)) {
+    try {
+      const order = JSON.parse(fs.readFileSync(metaPath, "utf8")) as string[];
+      return docs.sort((a, b) => {
+        const aIndex = order.indexOf(a.slug);
+        const bIndex = order.indexOf(b.slug);
+        if (aIndex === -1 && bIndex === -1) return a.slug.localeCompare(b.slug);
+        if (aIndex === -1) return 1;
+        if (bIndex === -1) return -1;
+        return aIndex - bIndex;
+      });
+    } catch (e) {
+      console.error(`Error parsing meta.json in ${topic} directory`, e);
+    }
+  }
+
+  return docs;
 }
 
 export function getDocContent(topic: string, slug: string) {

@@ -1,4 +1,4 @@
-import DocsSidebar from "@/components/docs-sidebar";
+import DocsSidebar from "@/components/sidebar/docs-sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { getDocsForTopic, getTopics } from "@/lib/mdx";
 

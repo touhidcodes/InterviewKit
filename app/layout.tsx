@@ -1,10 +1,10 @@
-import { ThemeProvider } from "@/components/theme-provider";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ThemeToggle } from "@/components/providers/theme-toggle";
 
 export const metadata: Metadata = {
   title: "InterviewKit - Ace Your Tech Interviews",
