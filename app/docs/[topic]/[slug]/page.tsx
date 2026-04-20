@@ -1,3 +1,4 @@
+import Markdown from "@/components/docs/markdown";
 import TocSidebar from "@/components/sidebar/toc-sidebar";
 import {
   extractHeadings,
@@ -7,10 +8,6 @@ import {
 } from "@/lib/mdx";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import ReactMarkdown from "react-markdown";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeSlug from "rehype-slug";
-import remarkGfm from "remark-gfm";
 
 const ArrowLeftIcon = ({ className }: { className?: string }) => (
   <svg
@@ -87,14 +84,7 @@ export default async function DocPage({
         </div>
 
         <div className="relative border-l border-border/40 pl-8 ml-2">
-          <div className="prose prose-invert prose-lg max-w-none prose-headings:scroll-mt-20">
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeSlug, rehypeAutolinkHeadings]}
-            >
-              {doc.content}
-            </ReactMarkdown>
-          </div>
+          <Markdown content={doc.content} />
         </div>
 
         <div className="mt-20 pt-12 border-t border-border/40">
