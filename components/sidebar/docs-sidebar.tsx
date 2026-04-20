@@ -41,9 +41,14 @@ export default function DocsSidebar({
         {navigation.map((section) => {
           const isSectionActive = pathname.startsWith(`/docs/${section.title}`);
           const coreDocs = section.docs.filter(
-            (doc) => doc.slug !== "q-and-a" && doc.slug !== "intro",
+            (doc) =>
+              doc.slug !== "q-and-a" &&
+              doc.slug !== "intro" &&
+              !doc.slug.includes("questions"),
           );
-          const qaDocs = section.docs.filter((doc) => doc.slug === "q-and-a");
+          const qaDocs = section.docs.filter(
+            (doc) => doc.slug === "q-and-a" || doc.slug.includes("questions"),
+          );
           const introDoc = section.docs.find((doc) => doc.slug === "intro");
 
           return (
@@ -105,11 +110,11 @@ export default function DocsSidebar({
                         </>
                       )}
 
-                      {/* Q&A Group */}
+                      {/* Interview Questions Group */}
                       {qaDocs.length > 0 && (
                         <>
                           <div className="px-2 py-2 mt-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground/50">
-                            Practice
+                            Interview Questions
                           </div>
                           {qaDocs.map((doc) => {
                             const href = `/docs/${section.title}/${doc.slug}`;
@@ -121,7 +126,7 @@ export default function DocsSidebar({
                                   className="h-8 text-sm text-muted-foreground font-medium hover:text-foreground data-[active=true]:text-foreground data-[active=true]:bg-muted/60"
                                   render={<Link href={href} />}
                                 >
-                                  Q&A Session
+                                  {doc.meta.title || doc.slug.replace("-", " ")}
                                 </SidebarMenuButton>
                               </SidebarMenuItem>
                             );

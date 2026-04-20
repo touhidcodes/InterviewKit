@@ -3,14 +3,10 @@ title: Introduction
 description: Welcome to the JavaScript interview kit.
 ---
 
-# JavaScript Interview Mastery
+# JavaScript Mastery Guide
 
-Master core JavaScript concepts with our interactive guide. Here's what we cover:
+Accelerate your path to becoming a Senior JavaScript Engineer. This curated guide dives deep into the engine internals, advanced patterns, and technical mental models required to excel in modern high-performance environments.
 
-- **Closures**: Understand lexical scoping and closures.
-- **Prototypes**: Master the prototype chain and inheritance.
-- **Promises**: Deep dive into asynchronous programming and Error handling.
-- **Event Loop**: Master the internals of how JS executes code.
-- **Context & Hooks**: Learn about `this` and React hooks context.
+From the intricacies of the **Event Loop** to the nuances of **Prototypal Inheritance** and **Memory Management**, we cover the core concepts that separate senior developers from the rest. Each section is optimized for clarity, interview readiness, and real-world application.
 
-Choose a topic from the list to get started.
+Choose a topic below to begin your journey into the heart of JavaScript.

@@ -7,12 +7,30 @@ description: Mastering the Event Loop, Call Stack, and Macrotasks vs Microtasks.
 
 JavaScript is a single-threaded language, which means it can only execute one command at a time. The **Event Loop** is what allows JS to perform non-blocking I/O operations despite its single-threaded nature.
 
-## Main Components
+## The Event Loop Architecture
 
-1. **Call Stack**: Where the code that is currently executing is placed. When a function is called, it is pushed onto the stack. When it completes, it is popped off.
-2. **Web APIs**: Provided by the environment (browser or Node.js). For example, `setTimeout`, `fetch`, and DOM events.
-3. **Macrotask Queue**: For tasks like `setTimeout`, `setInterval`, and I/O.
-4. **Microtask Queue**: For higher-priority tasks like `Promise.then` and `process.nextTick` (Node.js).
+![JavaScript Event Loop](./Images/event-loop.png)
+
+### Core Components
+
+1.  **Call Stack**:
+    - This is where the JavaScript engine keeps track of function execution.
+    - When a function is called, it's "pushed" onto the stack. When it finishes, it's "popped" off.
+    - Since JS is single-threaded, it can only have one Call Stack.
+
+2.  **Web APIs / Node APIs**:
+    - These are provided by the environment (Browser or Node.js).
+    - When you call `setTimeout`, the timer is handled here, not in the JS engine.
+    - Other APIs include DOM events, AJAX (XMLHttpRequest/Fetch), and File System (Node).
+
+3.  **Task Queue (Macrotasks)**:
+    - When a Web API finishes (e.g., a timer expires), it pushes the callback into the Task Queue.
+    - Macrotasks include: `setTimeout`, `setInterval`, `setImmediate`, I/O tasks.
+
+4.  **Job Queue (Microtasks)**:
+    - This is a special queue for high-priority tasks.
+    - Microtasks include: `Promises` (.then/catch/finally), `MutationObserver`, `process.nextTick` (Node.js).
+    - **Crucial Rule**: Microtasks are ALWAYS processed before the next macrotask.
 
 ## How it works
 
