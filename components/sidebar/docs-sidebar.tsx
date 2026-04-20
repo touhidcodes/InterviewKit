@@ -73,17 +73,9 @@ export default function DocsSidebar({
                       {/* Intro/Overview */}
                       <SidebarMenuItem>
                         <SidebarMenuButton
-                          isActive={
-                            pathname === `/docs/${section.title}` ||
-                            (introDoc &&
-                              pathname === `/docs/${section.title}/intro`)
-                          }
+                          isActive={pathname === `/docs/${section.title}`}
                           className="h-8 text-sm text-muted-foreground font-medium hover:text-foreground data-[active=true]:text-foreground data-[active=true]:bg-muted/60"
-                          render={
-                            <Link
-                              href={`/docs/${section.title}/${introDoc ? "intro" : ""}`}
-                            />
-                          }
+                          render={<Link href={`/docs/${section.title}`} />}
                         >
                           Overview
                         </SidebarMenuButton>

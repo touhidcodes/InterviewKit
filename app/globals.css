@@ -124,10 +124,14 @@
     @apply bg-background text-foreground antialiased;
   }
   html {
-    @apply font-sans;
+    @apply font-sans scroll-smooth;
   }
 }
 @layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-br from-foreground via-foreground to-foreground/60 bg-clip-text text-transparent;
+  }
+
   .doc-card {
     @apply relative overflow-hidden rounded-xl border border-border/50 bg-card/30 p-6 transition-all duration-300 hover:bg-card/50 hover:border-primary/20 hover:shadow-sm;
   }

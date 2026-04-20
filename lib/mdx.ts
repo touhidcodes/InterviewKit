@@ -104,17 +104,23 @@ export function getDocContent(topic: string, slug: string) {
 }
 
 export function extractHeadings(content: string) {
-  const headingRegex = /^(##|###)\s+(.*)$/gm;
-  const headings = [];
+  // Enhanced regex to match headings more robustly, handling potential whitespace
+  const headingRegex = /^(?:[ \t]*)(##|###)[ \t]+(.*)$/gm;
+  const headings: { title: string; id: string; level: number }[] = [];
   let match;
 
   while ((match = headingRegex.exec(content)) !== null) {
     const level = match[1].length;
-    const title = match[2].trim();
+    const title = match[2].trim().replace(/\r$/, "");
+
+    // Improved slug generation to closer match github-slugger
     const id = title
       .toLowerCase()
-      .replace(/[^\w\s-]/g, "")
-      .replace(/\s+/g, "-");
+      .trim()
+      .replace(/[^\w\s-]/g, "") // Remove special chars
+      .replace(/\s+/g, "-") // Replace spaces with -
+      .replace(/-+/g, "-"); // Remove multiple -
+
     headings.push({ title, id, level });
   }
 
