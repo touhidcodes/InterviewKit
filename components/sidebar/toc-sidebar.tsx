@@ -88,7 +88,7 @@ export default function TocSidebar({ headings }: { headings: Heading[] }) {
                 className={cn(
                   "flex items-center gap-1 group/item rounded-lg transition-all duration-200",
                   isMainActive || isAnySubActive
-                    ? "bg-primary/5"
+                    ? "bg-primary/10"
                     : "hover:bg-muted/50",
                 )}
               >
