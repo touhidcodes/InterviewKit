@@ -1,10 +1,10 @@
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ThemeToggle } from "@/components/providers/theme-toggle";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
-import { ThemeProvider } from "@/components/providers/theme-provider";
-import { ThemeToggle } from "@/components/providers/theme-toggle";
 
 export const metadata: Metadata = {
   title: "InterviewKit - Ace Your Tech Interviews",
@@ -77,21 +77,6 @@ export default function RootLayout({
               </div>
             </header>
             <main className="flex-1">{children}</main>
-            <footer className="border-t border-border/40 py-8 md:py-12">
-              <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-between gap-6 md:flex-row text-center md:text-left">
-                <div className="flex flex-col gap-2 items-center md:items-start">
-                  <span className="font-bold text-lg">InterviewKit</span>
-                  <p className="text-sm text-muted-foreground max-w-[300px]">
-                    Mastering the art of technical interviews, one topic at a
-                    time.
-                  </p>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  © {new Date().getFullYear()} InterviewKit. Built by Touhidur
-                  Zaman.
-                </p>
-              </div>
-            </footer>
           </div>
         </ThemeProvider>
       </body>

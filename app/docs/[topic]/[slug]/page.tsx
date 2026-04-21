@@ -60,6 +60,13 @@ export default async function DocPage({
   const topicName =
     topic.charAt(0).toUpperCase() + topic.slice(1).replace("-", " ");
 
+  // Get all docs for this topic to find prev/next
+  const allDocs = getDocsForTopic(topic);
+  const currentIndex = allDocs.findIndex((d) => d.slug === slug);
+  const prevDoc = currentIndex > 0 ? allDocs[currentIndex - 1] : null;
+  const nextDoc =
+    currentIndex < allDocs.length - 1 ? allDocs[currentIndex + 1] : null;
+
   return (
     <div className="xl:grid xl:grid-cols-[1fr_240px] xl:gap-10">
       <div className="mx-auto w-full min-w-0 max-w-3xl">
@@ -87,10 +94,67 @@ export default async function DocPage({
           <Markdown content={doc.content} />
         </div>
 
-        <div className="mt-20 pt-12 border-t border-border/40">
-          <p className="text-center text-sm text-muted-foreground">
-            Found a mistake? Help us improve this guide on GitHub.
-          </p>
+        {/* Previous / Next Navigation */}
+        <div className="mt-20 pt-10 border-t border-border/40">
+          <div className="flex flex-col sm:flex-row gap-4">
+            {prevDoc ? (
+              <Link
+                href={`/docs/${topic}/${prevDoc.slug}`}
+                className="flex-1 p-6 rounded-2xl border border-border/40 hover:border-primary/40 hover:bg-muted/30 transition-all group"
+              >
+                <div className="text-xs text-muted-foreground font-medium mb-2">
+                  Previous
+                </div>
+                <div className="flex items-center font-bold text-lg group-hover:text-primary transition-colors">
+                  <svg
+                    className="mr-2 h-5 w-5 transform group-hover:-translate-x-1 transition-transform"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                  {prevDoc.meta.title || prevDoc.slug}
+                </div>
+              </Link>
+            ) : (
+              <div className="flex-1 hidden sm:block" />
+            )}
+
+            {nextDoc ? (
+              <Link
+                href={`/docs/${topic}/${nextDoc.slug}`}
+                className="flex-1 p-6 rounded-2xl border border-border/40 text-right hover:border-primary/40 hover:bg-muted/30 transition-all group"
+              >
+                <div className="text-xs text-muted-foreground font-medium mb-2">
+                  Next
+                </div>
+                <div className="flex items-center justify-end font-bold text-lg group-hover:text-primary transition-colors">
+                  {nextDoc.meta.title || nextDoc.slug}
+                  <svg
+                    className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </div>
+              </Link>
+            ) : (
+              <div className="flex-1 hidden sm:block" />
+            )}
+          </div>
         </div>
       </div>
 

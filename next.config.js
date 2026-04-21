@@ -1,10 +1,10 @@
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV === "production";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // output: 'export',
   // Use basePath only for clean deployment
-  basePath: isProd ? '/InterviewKit' : '',
+  // basePath: isProd ? '/InterviewKit' : '',
   images: {
     unoptimized: true,
   },
