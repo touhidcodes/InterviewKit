@@ -1,81 +1,83 @@
 ---
-title: Advanced Types
-description: Union, Intersection, and Conditional types.
+title: Advanced Algebraic Types
+description: Understanding types as sets and logic operations.
 ---
 
-# TypeScript Advanced Types
+# Advanced Types: Type Algebra
 
-In many situations, simple types aren't enough. TypeScript provides several ways to combine and manipulate types for more sophisticated logic.
+TypeScript's type system is based on **Set Theory**. A type can be viewed as a set of values. "Advanced" types are operations performed on these sets.
 
-### 1. Union Types
+## 1. Union Types (Sum Types)
 
-Allows a variable to be one of several types.
+**The Logic**: `A | B`.
+**Theory**: The set of values that are in `A` **OR** in `B`. In type theory, this is called a **Sum Type**.
 
 ```typescript
-type ID = string | number | string[];
+type ID = string | number;
 ```
 
-### 2. Intersection Types
+**Constraint**: When using a union, you can only safely access properties that exist in **both** types unless you use narrowing.
 
-Combines multiple types into one. This is common when extending existing types with new features.
+## 2. Intersection Types (Product Types)
+
+**The Logic**: `A & B`.
+**Theory**: The set of values that satisfy both `A` **AND** `B`. This is often called a **Product Type**.
 
 ```typescript
-interface ErrorHandling {
-  success: boolean;
-  error?: { message: string };
-}
-interface ArtworksData {
-  artworks: { title: string }[];
-}
-
-type ArtworksResponse = ArtworksData & ErrorHandling;
+type AdminUser = User & Permissions;
 ```
 
-### 3. Conditional Types
+**Relationship**: Intersections are a way to achieve composition over inheritance.
 
-A conditional type selects one of two possible types based on a condition expressed as a type relationship test.
+## 3. Conditional Types (Type Logic)
+
+**The Logic**: `T extends U ? X : Y`.
+**Theory**: This is "If-Then-Else" logic for the type system. It allows types to be programmable.
+
+**The `infer` Keyword**:
+Allows "pattern matching" within a conditional type to extract a piece of information.
 
 ```typescript
-T extends U ? X : Y
+type GetType<T> = T extends (infer U)[] ? U : T;
+// If T is an array, extract the element type U.
 ```
 
-Example:
+## 4. Mapped Types (Transformation)
+
+**The Theory**: A mapped type is a function that iterates over a set of keys and generates a new set of properties.
 
 ```typescript
-type NonNullable<T> = T extends null | undefined ? never : T;
-```
-
-### 4. Mapped Types
-
-A mapped type is a generic type which uses a union of `PropertyKey`s to create a type.
-
-```typescript
-type OptionsFlags<Type> = {
-  [Property in keyof Type]: boolean;
+type Options<T> = {
+  [P in keyof T]: boolean;
 };
-
-type FeatureFlags = {
-  darkMode: () => void;
-  newUserProfile: () => void;
-};
-
-type FeatureOptions = OptionsFlags<FeatureFlags>;
-// FeatureOptions: { darkMode: boolean; newUserProfile: boolean; }
 ```
 
-### 5. Template Literal Types
+**Internal Mechanism**: Uses the `keyof` operator to get a union of all property names in `T`, then maps over them.
 
-Template literal types build on string literal types, and have the same syntax as template literal strings in JavaScript.
+## 5. Template Literal Types (String Algebra)
+
+**The Theory**: These allow for the algebraic combination of string literals.
 
 ```typescript
-type World = "world";
-type Greeting = `hello ${World}`;
+type Vertical = "top" | "bottom";
+type Horizontal = "left" | "right";
+
+type Position = `${Vertical}-${Horizontal}`;
+// Result: "top-left" | "top-right" | "bottom-left" | "bottom-right"
 ```
 
-Combining with unions:
+**Power**: This allows TypeScript to model complex string patterns (like CSS properties or URL paths) with absolute precision.
+
+## 6. Recursive Types
+
+**The Theory**: A type that references itself. Essential for modelling nested data structures like JSON or Trees.
 
 ```typescript
-type EmailLocaleIDs = "en" | "es" | "fr";
-type FooterLocaleIDs = "footer_en" | "footer_es" | "footer_fr";
-type AllLocaleIDs = `${EmailLocaleIDs | FooterLocaleIDs}_id`;
+type JSONValue =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: JSONValue }
+  | JSONValue[];
 ```

@@ -1,57 +1,78 @@
 ---
-title: Interfaces vs Types
-description: Understand the key differences and when to use each.
+title: Interfaces vs Type Aliases
+description: Analyzing the structural identity and performance differences.
 ---
 
-# Interfaces vs Types in TypeScript
+# Interfaces vs Type Aliases: Structural Analysis
 
-One of the most common interview questions: "What's the difference between an `interface` and a `type` alias?"
+While they appear similar, `interface` and `type` have different theoretical implementations in the TypeScript compiler.
 
-### Key Commonalities
+## 1. Declaration Merging (The Interface Advantage)
 
-- Both can describe an object's shape or a function signature.
-- Both can be extended (via `extends` or `&` intersection).
-- Both can be used with `implements` in a class.
+**The Theory**: Interfaces are "open" by design. This allows for **Declaration Merging**, a critical feature for extending third-party libraries or the global scope (e.g., adding a property to `window`).
 
 ```typescript
-// Interface
 interface User {
-  name: string;
-  age: number;
+  id: string;
 }
 
-// Type alias
-type UserType = {
-  name: string;
-  age: number;
-};
+// In another part of the app
+interface User {
+  role: string;
+}
+
+const user: User = { id: "1", role: "admin" }; // Merged
 ```
 
-### Key Differences
+**Constraint**: Type Aliases are "closed." They cannot be changed after creation.
 
-1. **Declaration Merging**: Only `interfaces` support declaration merging. If you define the same interface twice, they merge. Type aliases do not.
-   ```typescript
-   interface Box {
-     height: number;
-   }
-   interface Box {
-     width: number;
-   }
-   // Box now has both height and width. This is not possible with types.
-   ```
-2. **Primitive types**: `type` can represent primitives like `string` or `number`, and union/intersection of those. `interface` is limited to object shapes.
-   ```typescript
-   type ID = string | number; // OK
-   // interface ID extends string | number {} // NOT OK
-   ```
-3. **Computed Properties**: `type` can use computed properties in their definition.
-   ```typescript
-   type Keys = "name" | "age";
-   type UserMap = { [K in Keys]: string }; // Map through types
-   ```
+## 2. Structural Identity
 
-### Recommendation
+An `interface` creates a named type in the compiler's symbol table. A `type` alias is just a name for a specific shape (or union/intersection).
 
-- Use `interface` for public APIs and when you need declaration merging.
-- Use `type` for complex types (unions, intersections, conditional types, and mapped types).
-- Consistency is key in a project!
+### Performance Theory
+
+In large codebases, **interfaces** generally perform better during type-checking than type aliases.
+
+- **Interfaces**: Cached by the compiler because they are named and stable.
+- **Type Aliases**: Checked via structural comparison (flattening), which can be computationally expensive if the types are deeply nested.
+
+## 3. Capabilities Comparison
+
+| Feature                    | Interface         | Type Alias            |
+| :------------------------- | :---------------- | :-------------------- |
+| **Declaration Merging**    | Yes               | No                    |
+| **Primitives**             | No (Objects only) | Yes                   |
+| **Unions / Intersections** | No                | Yes                   |
+| **Mapped Types**           | No                | Yes                   |
+| **Classes can implement**  | Yes               | Yes (if object shape) |
+
+## 4. Emulating Nominal Typing (Branding)
+
+TypeScript is structural, but sometimes you want the compiler to treat a `string` as a `UserId`. We can use **Type Branding** (a theoretical pattern) to achieve this.
+
+```typescript
+type Brand<T, TBrand> = T & { __brand: TBrand };
+
+type UserId = Brand<string, "UserId">;
+type PostId = Brand<string, "PostId">;
+
+let u: UserId = "123" as UserId;
+let p: PostId = "abc" as PostId;
+
+// u = p; // Error: PostId is not assignable to UserId
+```
+
+**Theory**: By adding a unique, non-existent property (`__brand`), we force the structural checker to differentiate between two strings.
+
+## 5. Decision Matrix
+
+1. **Use `interface`**:
+   - Defining the shape of an object or a class.
+   - Creating a public library (allows users to extend your types).
+   - When you care about hot-path compiler performance.
+
+2. **Use `type`**:
+   - Defining unions, intersections, or tuples.
+   - Using advanced features like mapped types or conditional types.
+   - Renaming primitives for clarity.

@@ -1,8 +1,10 @@
 [
   "overview",
   "basics",
+  "type-inference",
   "interfaces-vs-types",
-  "advanced-types",
   "generics",
-  "utility-types"
+  "advanced-types",
+  "utility-types",
+  "compiler-architecture"
 ]

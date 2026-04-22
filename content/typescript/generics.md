@@ -1,64 +1,76 @@
 ---
-title: Generics
-description: Creating reusable and type-safe components.
+title: Parametric Polymorphism (Generics)
+description: Deep dive into generic types, constraints, and distributivity.
 ---
 
-# TypeScript Generics
+# Generics: Parametric Polymorphism
 
-TypeScript **Generics** are used to provide safe types when dealing with dynamic data. They Allow us to define components (like functions or classes) with a placeholder type that we can fill in later.
+In computer science, **Generics** are a form of **Parametric Polymorphism**. They allow a single piece of code (function, class, or type) to work over multiple types while maintaining strict type safety.
 
-### Generic Function example
+## 1. The Theory of Placeholder Types
 
-```typescript
-function identity<T>(arg: T): T {
-  return arg;
-}
-
-const output1 = identity<string>("myString"); // T is string
-const output2 = identity<number>(100); // T is number
-```
-
-### Generic Interface example
+A generic type is essentially a "type variable." It holds a spot for a type that will be provided at a later time.
 
 ```typescript
-interface GenericIdentityFn<T> {
-  (arg: T): T;
+function wrapInArray<T>(value: T): T[] {
+  return [value];
 }
-
-let myIdentity: GenericIdentityFn<number> = (arg) => arg;
 ```
 
-### Constraints with `extends`
+**Theory**: `T` is a metadata label. When we call `wrapInArray(10)`, the compiler replaces all instances of `T` with `number`. This is called **Specialization**.
 
-Sometimes you want to limit what a generic can be. You can use `extends` to add constraints.
+## 2. Generic Constraints (`extends`)
+
+Sometimes a type variable is too broad. We can limit it using the `extends` keyword.
 
 ```typescript
 interface Lengthwise {
   length: number;
 }
 
-function loggingIdentity<T extends Lengthwise>(arg: T): T {
-  console.log(arg.length); // OK
-  return arg;
+function logLength<T extends Lengthwise>(arg: T): number {
+  return arg.length; // Safe because T MUST have .length
 }
 ```
 
-### Generic Classes example
+**Relationship Theory**: `T extends Lengthwise` means `T` must be **assignable** to `Lengthwise`. It can have _more_ properties, but it cannot have _fewer_.
+
+## 3. Distributive Conditional Types
+
+This is a deep theoretical concept in TypeScript. When a generic type `T` is a **naked type parameter** (used alone) in a conditional type, it becomes **distributive** over unions.
 
 ```typescript
-class GenericNumber<T> {
-  zeroValue: T;
-  add: (x: T, y: T) => T;
+type ToArray<T> = T extends any ? T[] : never;
 
-  constructor(zero: T, addFn: (x: T, y: T) => T) {
-    this.zeroValue = zero;
-    this.add = addFn;
-  }
-}
-
-let myGenericNumber = new GenericNumber<number>(0, (x, y) => x + y);
+type StrOrNumArray = ToArray<string | number>;
+// Result: string[] | number[]
 ```
 
-### Summary
+**How it works**:
+Instead of treating `string | number` as a single unit, TypeScript iterates through each part:
 
-Generics provide a way to create components that work over a variety of types rather than a single one. This makes your code more flexible, reusable, and most importantly, type-safe.
+1. `string extends any ? string[] : never` -> `string[]`
+2. `number extends any ? number[] : never` -> `number[]`
+3. Result: `string[] | number[]`
+
+## 4. Generic Defaults
+
+Just like function arguments, type parameters can have defaults.
+
+```typescript
+interface APIResponse<T = any> {
+  data: T;
+  status: number;
+}
+
+const defaultRes: APIResponse = { data: "raw", status: 200 }; // T is any
+const userRes: APIResponse<User> = { data: someUser, status: 200 }; // T is User
+```
+
+## 5. Summary
+
+| Term              | Theoretical Meaning                                                   |
+| :---------------- | :-------------------------------------------------------------------- |
+| **Parametricity** | The logic is independent of the type.                                 |
+| **Instantiation** | The process of replacing `T` with a concrete type.                    |
+| **Variance**      | How generic types interact with subtyping (Invariance vs Covariance). |
