@@ -1,3 +1,4 @@
+import { Footer } from "@/components/layout/footer";
 import Link from "next/link";
 
 // Inline SVG components to replace lucide-react icons and avoid potential module-not-found issues

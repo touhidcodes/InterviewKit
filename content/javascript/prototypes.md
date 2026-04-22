@@ -1,60 +1,86 @@
 ---
 title: Prototypes
-description: Explaining Object Prototyping and Inheritance in JavaScript.
+description: Understanding prototypal inheritance and the prototype chain in JavaScript.
 ---
 
 # Prototypes in JavaScript
 
-In JavaScript, every object has a private property which holds a link to another object called its **prototype**. That prototype object has a prototype of its own, and so on until an object is reached with `null` as its prototype.
+In JavaScript, inheritance is based on **prototypes**. Unlike class-based languages (like Java or C++), where classes are blueprints for objects, JavaScript objects inherit directly from other objects.
 
-By definition, `null` has no prototype, and acts as the final link in this **prototype chain**.
+## The Theory of Prototypal Inheritance
 
-## The Prototypal Chain
+### 1. The `[[Prototype]]` link
 
-When you try to access a property on an object, JavaScript first looks at the object itself. If the property doesn't exist, it checks the object's prototype, then the prototype of THAT prototype, until it finds the property or reaches `null`.
+Every object in JavaScript has an internal property called `[[Prototype]]`. This is the link to its "parent" object. You can access this link via `Object.getPrototypeOf(obj)` or the legacy `__proto__` property.
+
+### 2. The `prototype` Property
+
+This is a source of confusion.
+
+- `[[Prototype]]` is the link **on the object instance**.
+- `prototype` is a property **on constructor functions** (and classes). It is the object that will be assigned as `[[Prototype]]` to all instances created by that constructor.
+
+## The Prototype Chain Architecture
+
+When you access a property `obj.prop`:
+
+1. The engine looks for `prop` on `obj` itself.
+2. If not found, it follows the `[[Prototype]]` link to the parent.
+3. It repeats this until the property is found or it hits `Object.prototype` (the end of the chain).
+4. If it reaches `null` (the prototype of `Object.prototype`), it returns `undefined`.
+
+## Memory Efficiency (Why use Prototypes?)
+
+By putting methods on the `prototype` instead of the instance, we save significant memory.
 
 ```javascript
-const person = {
-  isHuman: false,
-  printIntroduction: function () {
-    console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
+function User(name) {
+  this.name = name;
+  // BAD: Every instance gets its own copy of this function
+  this.sayHi = function () {
+    console.log(this.name);
+  };
+}
+
+// GOOD: All instances share a single copy of this function
+User.prototype.sayHello = function () {
+  console.log(this.name);
+};
+```
+
+## Shadowing Properties
+
+If an object and its prototype both have a property with the same name, the object's property "shadows" the prototype's.
+
+```javascript
+const parent = {
+  value: 2,
+  method() {
+    return this.value + 1;
   },
 };
+const child = Object.create(parent);
 
-const me = Object.create(person);
-
-me.name = "John"; // "name" is a property set on "me", but not on "person"
-me.isHuman = true; // inherited properties can be overwritten
-
-me.printIntroduction();
-// My name is John. Am I human? true
+child.value = 4; // Shadowing
+console.log(child.method()); // 5
+// 'this' in method() refers to 'child', even though method is on 'parent'
 ```
 
-## `__proto__` vs `prototype`
+## ES6 Classes: The "Sugar" Theory
 
-- `__proto__` (dunder proto) is a property of every object. It points to the prototype object from which it inherited.
-- `prototype` is a property ONLY of constructor functions. It's the object that will be used as `__proto__` for all instances created by that function.
-
-## ES6 Classes (Syntactic Sugar)
-
-JavaScript's `class` keyword is mostly syntactic sugar over prototypal inheritance.
+ES6 Classes are not a "new" inheritance model. They are a cleaner syntax for the prototype system.
 
 ```javascript
-class Animal {
-  constructor(name) {
-    this.name = name;
-  }
+class Animal {}
+class Dog extends Animal {}
 
-  speak() {
-    console.log(`${this.name} makes a noise.`);
-  }
-}
-
-class Dog extends Animal {
-  speak() {
-    console.log(`${this.name} barks.`);
-  }
-}
+// Internally:
+// Dog.prototype.[[Prototype]] === Animal.prototype
+// Dog.[[Prototype]] === Animal (static inheritance)
 ```
 
-This is practically the same as creating a constructor function `Animal` and setting `Dog.prototype = Object.create(Animal.prototype)`.
+## Key Methods to Remember
+
+- `Object.create(proto)`: Creates a new object with a specific prototype.
+- `Object.getPrototypeOf(obj)`: The modern way to get an object's prototype.
+- `obj.hasOwnProperty(key)`: Checks if a property belongs to the object itself, not the chain.
