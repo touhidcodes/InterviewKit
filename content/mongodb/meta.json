@@ -1,15 +1,10 @@
 [
   "overview",
-  "crud",
   "data-modeling",
-  "schema-design",
-  "indexing",
-  "aggregation",
-  "operators",
-  "transactions",
-  "performance",
-  "replication",
-  "sharding",
-  "security",
-  "q-and-a"
+  "indexing-theory",
+  "aggregation-framework",
+  "transactions-acid",
+  "replication-sharding",
+  "performance-tuning",
+  "security-best-practices"
 ]
